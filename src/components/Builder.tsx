@@ -10,13 +10,14 @@ import {
   benchRecipe, customPrice, describeWarmth, formulaCode, parseFormulaCode, scoreQuiz, validateFormula,
   type AccordId, type Answers, type Formula, type Intensity, type ModifierId,
 } from "@/lib/builder";
-import { BLEND_MAX, cleanLabelText, type Personalization } from "@/lib/cart-types";
+import { BLEND_MAX, cleanLabelText, labelProblem, type Personalization } from "@/lib/cart-types";
 import { PRICES, money, type Size } from "@/lib/site";
 import { track } from "@/lib/analytics";
 import { useCart } from "@/lib/cart";
 import { useFillDates } from "@/lib/use-fill-dates";
 import { Bottle } from "./Bottle";
 import { LabelFields, emptyPersonalization } from "./LabelFields";
+import { readSavedLabel, saveLabel } from "@/lib/personalization";
 import { FillDateNote } from "./FillDateNote";
 
 /* ---------- steps ---------- */
@@ -55,6 +56,7 @@ type Action =
   | { type: "size"; value: Size }
   | { type: "fromCode"; formula: Formula }
   | { type: "nameError"; value: string | null }
+  | { type: "personalizeIfEmpty"; value: { name: string; city: string } }
   | { type: "done" }
   | { type: "reset" };
 
@@ -94,6 +96,8 @@ function reducer(s: State, a: Action): State {
     case "size": return { ...s, size: a.value };
     case "fromCode": return { ...INITIAL, formula: a.formula, step: STEPS.indexOf("label"), started: true };
     case "nameError": return { ...s, nameError: a.value };
+    case "personalizeIfEmpty":
+      return s.personalization.name || s.personalization.city ? s : { ...s, personalization: { ...s.personalization, ...a.value } };
     case "done": return { ...s, done: true };
     case "reset": return INITIAL;
   }
@@ -124,6 +128,9 @@ export function Builder() {
         if (saved && typeof saved.step === "number" && !saved.done) dispatch({ type: "restore", state: { ...INITIAL, ...saved } });
       } catch { /* storage blocked */ }
     }
+    // Carry the name and city typed elsewhere on the site into the label step, unless this blend already has its own.
+    const label = readSavedLabel();
+    if (label.name || label.city) dispatch({ type: "personalizeIfEmpty", value: label });
     hydrated.current = true;
     track("builder_start", { entry: parsed ? "formula_code" : document.referrer ? new URL(document.referrer).pathname : "direct" });
   }, [params]);
@@ -166,9 +173,10 @@ export function Builder() {
 
   function next() {
     if (stepKey === "tune") track("builder_tune", { accord: s.formula.accord, modifiers: s.formula.modifiers, warmth: s.formula.warmth, intensity: s.formula.intensity });
-    if (stepKey === "label" && !s.personalization.name.trim()) {
-      dispatch({ type: "nameError", value: "Add the name for your label." });
-      document.getElementById("build-name")?.focus();
+    const problem = stepKey === "label" ? labelProblem(s.personalization) : null;
+    if (problem) {
+      if (problem.field === "name" && !s.personalization.name.trim()) dispatch({ type: "nameError", value: problem.message });
+      document.getElementById(`build-${problem.field}`)?.focus();
       return;
     }
     dispatch({ type: "go", step: s.step + 1 });
@@ -176,12 +184,12 @@ export function Builder() {
 
   function addToBag() {
     if (errors.length) return;
-    if (!s.personalization.name.trim()) { dispatch({ type: "go", step: STEPS.indexOf("label") }); return; }
+    if (labelProblem(s.personalization)) { dispatch({ type: "go", step: STEPS.indexOf("label") }); return; }
     track("personalization_complete", { item_id: code, has_city: !!s.personalization.city, has_message: !!s.personalization.message, city_source: s.personalization.city ? "typed" : "none" });
     track("builder_complete", { formula_code: code, size: s.size, value: price });
     add({
       kind: "custom", sku: `CMP-${s.size}`, title: `${blendTitle} (custom)`, price, size: s.size, tint: accord.tint,
-      personalization: { ...s.personalization, name: s.personalization.name.trim() }, formula: s.formula, formulaCode: code, blendName: blendTitle,
+      personalization: { ...s.personalization, name: s.personalization.name.trim(), city: s.personalization.city.trim(), message: s.personalization.message.trim() }, formula: s.formula, formulaCode: code, blendName: blendTitle,
     });
     dispatch({ type: "done" });
   }
@@ -327,7 +335,7 @@ export function Builder() {
                 <input id="build-blend" className="input" value={s.blendName} maxLength={BLEND_MAX} placeholder={`e.g. Night Shift (or keep "${accord.name}")`}
                   onChange={(e) => dispatch({ type: "blend", value: cleanLabelText(e.target.value, BLEND_MAX) })} />
               </div>
-              <LabelFields value={s.personalization} onChange={(v) => dispatch({ type: "personalize", value: v })} surface="builder" nameError={s.nameError} idPrefix="build" />
+              <LabelFields value={s.personalization} onChange={(v) => { dispatch({ type: "personalize", value: v }); saveLabel(v); }} surface="builder" nameError={s.nameError} idPrefix="build" />
               <p className="mb-2 mt-6 text-[15px]">Size</p>
               <div className="mb-8 grid grid-cols-2 gap-2.5" role="radiogroup" aria-label="Size">
                 {([50, 100] as const).map((z) => (

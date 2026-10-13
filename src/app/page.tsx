@@ -7,9 +7,9 @@ import { SCENTS } from "@/lib/scents";
 import { PRICES, money } from "@/lib/site";
 
 const STEPS = [
-  { title: "You choose", body: "Pick a house scent, or answer six questions and build your own. Then tell us whose name goes on the label." },
-  { title: "We mix it", body: "At the next bench session we weigh the concentrate, blend it into the base and fill your bottle by hand." },
-  { title: "It's labeled for you", body: "Your name, city and the day it was made print on the label. It ships the next weekday." },
+  { title: "You choose", body: "Pick a house scent, or answer six quick questions to start a custom one. Add the name and city for your label." },
+  { title: "We mix it", body: "At the next bench session we weigh the concentrate, blend it into the base and fill your bottle by hand, within 48 hours." },
+  { title: "It's labeled for you", body: "Your name, city and made-on date are printed on the label. It ships the next weekday." },
 ];
 
 const EXAMPLES = [
@@ -23,8 +23,8 @@ const stroke = { fill: "none", stroke: "currentColor", strokeWidth: 1.2, strokeL
 const TRUST = [
   { title: "Fresh-filled", body: "Mixed after you order", icon: <><path d="M9 3h6M10 3v5l-4.5 9.5A2.5 2.5 0 0 0 7.8 21h8.4a2.5 2.5 0 0 0 2.3-3.5L14 8V3" {...stroke} /><path d="M7.5 14h9" {...stroke} /></> },
   { title: "Personalized label", body: "Name, city and fill date", icon: <><ellipse cx="12" cy="12" rx="7" ry="9" {...stroke} /><path d="M9 10.5h6M9.5 13.5h5" {...stroke} /></> },
-  { title: "Free returns on Discovery Set", body: "Not for you? Send it back", icon: <><path d="M4 9h11a5 5 0 0 1 0 10H8" {...stroke} /><path d="M8 5 4 9l4 4" {...stroke} /></> },
-  { title: "Secure checkout", body: "Opens at launch", icon: <><rect x="5" y="10.5" width="14" height="10" rx="1.5" {...stroke} /><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5M12 14.5v2.5" {...stroke} /></> },
+  { title: "Discovery credit", body: `${money(PRICES.discovery)} back on your first full bottle`, icon: <><rect x="4" y="7" width="16" height="11" rx="1.5" {...stroke} /><path d="M4 11h16M8 15h3" {...stroke} /></> },
+  { title: "Ships next weekday", body: "Ground, after your bottle is filled", icon: <><path d="M3.5 7.5h10v9h-10zM13.5 10.5h4l3 3v3h-7" {...stroke} /><circle cx="7.5" cy="17.5" r="1.5" {...stroke} /><circle cx="17" cy="17.5" r="1.5" {...stroke} /></> },
 ];
 
 export default function Home() {
@@ -49,7 +49,10 @@ export default function Home() {
       <section className="section">
         <div className="wrap">
           <div className="mb-10 flex items-end justify-between gap-4">
-            <h2 className="text-h2">The house scents</h2>
+            <div>
+              <h2 className="text-h2">The house scents</h2>
+              <p className="meta mt-1">Not sure yet? <Link href="/scents/#find" className="text-ink underline underline-offset-4">Find your scent</Link> in two questions.</p>
+            </div>
             <Link href="/scents/" className="link-line text-[15px]">View all</Link>
           </div>
           <div className="grid grid-cols-2 gap-x-4 gap-y-16 md:grid-cols-3">
@@ -81,19 +84,20 @@ export default function Home() {
           <div>
             <h2 className="text-h2">Or build one that&apos;s only yours.</h2>
             <p className="lede mt-5 text-on-ink/70">
-              Answer six quick questions. We match you to a base, you tune it with up to three notes, and name it. Your formula is saved, so you can reorder it exactly.
+              Answer six quick questions. We match you to a starting base, then you tune it with up to three notes. Name it, save the formula, and reorder it exactly.
             </p>
             <Link href="/build/" className="btn mt-8 border-on-ink bg-on-ink text-ink hover:bg-transparent hover:text-on-ink">
               Start building, from {money(PRICES.custom[50])}
             </Link>
           </div>
-          <dl className="grid grid-cols-[110px_1fr] gap-y-3 border-t border-on-ink/20 pt-5 text-sm text-on-ink/80">
-            <dt className="text-on-ink/50">Base</dt><dd>Green Fig</dd>
-            <dt className="text-on-ink/50">Notes</dt><dd>Bergamot, cedar</dd>
-            <dt className="text-on-ink/50">Warmth</dt><dd>A little warmer</dd>
-            <dt className="text-on-ink/50">Strength</dt><dd>Classic, 17%</dd>
-            <dt className="text-on-ink/50">Formula</dt><dd>CMP-A2-M01.M09-W+1-I17</dd>
-          </dl>
+          {/* Example custom blend, read top to bottom: how it feels, then the record. */}
+          <figure className="border-t border-on-ink/20 pt-6">
+            <figcaption className="text-meta text-on-ink/60">Example blend</figcaption>
+            <p className="mt-3 text-[22px] leading-snug">Your Fieldnote</p>
+            <p className="mt-1 text-on-ink/80">Green Fig · Bergamot · Cedar</p>
+            <p className="text-on-ink/80">A little warmer · Classic strength</p>
+            <p className="mt-5 text-meta text-on-ink/60">Formula <span className="ml-1 text-on-ink/80">CMP-A2-M01.M09-W+1-I17</span></p>
+          </figure>
         </div>
       </section>
 
@@ -118,8 +122,9 @@ export default function Home() {
           <div>
             <h2 className="text-h2">Find us on campus</h2>
             <p className="lede mt-5">This fall we&apos;re setting up a blending table at UCLA, USC, NYU, UT Austin and Michigan. Smell everything, then order on the spot.</p>
+            <p className="meta mt-4">Dates aren&apos;t set yet. We&apos;ll email each campus date and location before the bench opens.</p>
           </div>
-          <Newsletter source="campus" cta="Get pop-up dates" />
+          <Newsletter source="campus" cta="Get pop-up updates" campuses={["UCLA", "USC", "NYU", "UT Austin", "University of Michigan", "Another campus"]} />
         </div>
       </section>
     </>

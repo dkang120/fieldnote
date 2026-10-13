@@ -11,9 +11,9 @@ import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url + "/"),
-  title: { default: "Fieldnote | Cologne mixed after you order", template: "%s | Fieldnote" },
+  title: { default: "Fieldnote — Cologne mixed after you order", template: "%s | Fieldnote" },
   description: SITE.description,
-  openGraph: { type: "website", siteName: "Fieldnote", title: "Fieldnote | Cologne mixed after you order", description: SITE.description },
+  openGraph: { type: "website", siteName: "Fieldnote", title: "Fieldnote — Cologne mixed after you order", description: SITE.description },
   twitter: { card: "summary" },
   icons: {
     icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cellipse cx='16' cy='16' rx='11' ry='14' fill='%23F2F1EF' stroke='%23111111'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='serif' font-size='14'%3EF%3C/text%3E%3C/svg%3E",

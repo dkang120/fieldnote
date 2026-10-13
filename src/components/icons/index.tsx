@@ -25,3 +25,6 @@ export const Share = ({ className = "size-5" }: { className?: string }) => (
 export const ChevronRight = ({ className = "size-5" }: { className?: string }) => (
   <svg {...base} className={className}><path d="m9 5.5 6.5 6.5L9 18.5" /></svg>
 );
+export const Alert = ({ className = "size-4" }: { className?: string }) => (
+  <svg {...base} className={className}><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5v5.5M12 16.2v.3" /></svg>
+);

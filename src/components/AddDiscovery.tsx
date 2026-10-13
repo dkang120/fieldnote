@@ -12,10 +12,11 @@ export function AddDiscovery() {
   const go = () => add({ kind: "discovery", sku: "DS-06", title: "Discovery Set", price: PRICES.discovery, tint: "#D9D9D9" });
   return (
     <>
-      <button className="btn my-3 w-full" onClick={go}>Add to bag, {money(PRICES.discovery)}</button>
-      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 border-t border-line bg-canvas px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 md:hidden">
-        <span>{money(PRICES.discovery)}</span>
-        <button className="btn flex-1" onClick={go}>Add to bag</button>
+      <button className="btn my-3 w-full" onClick={go}>Start with all six, {money(PRICES.discovery)}</button>
+      <div className="fixed inset-x-3 bottom-[calc(env(safe-area-inset-bottom)+12px)] z-30 md:hidden">
+        <button onClick={go} className="flex h-14 w-full items-center justify-between rounded-full bg-ink px-7 text-on-ink shadow-[0_6px_20px_rgba(17,17,17,0.18)]">
+          <span className="font-medium">Add to bag</span><span className="price">{money(PRICES.discovery)}</span>
+        </button>
       </div>
     </>
   );

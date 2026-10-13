@@ -11,7 +11,9 @@ import { useSaved } from "@/lib/saved";
 import { PRICES, money, type Size } from "@/lib/site";
 import type { Scent } from "@/lib/scents";
 import { Bottle } from "./Bottle";
-import { LabelFields, emptyPersonalization } from "./LabelFields";
+import { LabelFields } from "./LabelFields";
+import { usePersonalization } from "@/lib/personalization";
+import { labelProblem } from "@/lib/cart-types";
 import { FillDateNote } from "./FillDateNote";
 import { ArrowLeft, Bag, Bookmark, ChevronRight, Share } from "./icons";
 
@@ -22,7 +24,7 @@ type Tab = (typeof TABS)[number];
 export function ProductBuy({ scent: s }: { scent: Scent }) {
   const [size, setSize] = useState<Size>(50);
   const [resized, setResized] = useState(false);
-  const [p, setP] = useState(emptyPersonalization);
+  const [p, setP] = usePersonalization();
   const [nameError, setNameError] = useState<string | null>(null);
   const [open, setOpenRow] = useState<"label" | "ship" | null>(null);
   const [tab, setTab] = useState<Tab>("Details");
@@ -38,15 +40,16 @@ export function ProductBuy({ scent: s }: { scent: Scent }) {
   }, [s]);
 
   function addToBag() {
-    if (!p.name.trim()) {
-      setNameError("Add the name for your label.");
+    const problem = labelProblem(p);
+    if (problem) {
+      if (problem.field === "name" && !p.name.trim()) setNameError(problem.message);
       setOpenRow("label");
-      requestAnimationFrame(() => document.getElementById("pdp-name")?.focus());
+      requestAnimationFrame(() => document.getElementById(`pdp-${problem.field}`)?.focus());
       return;
     }
     setNameError(null);
     track("personalization_complete", { item_id: `${s.code}-${size}`, has_city: !!p.city, has_message: !!p.message, city_source: p.city ? "typed" : "none" });
-    add({ kind: "house", sku: `${s.code}-${size}`, slug: s.slug, no: s.no, title: s.name, price, size, tint: s.tint, personalization: { ...p, name: p.name.trim() } });
+    add({ kind: "house", sku: `${s.code}-${size}`, slug: s.slug, no: s.no, title: s.name, price, size, tint: s.tint, personalization: { ...p, name: p.name.trim(), city: p.city.trim(), message: p.message.trim() } });
   }
 
   async function share() {
@@ -156,6 +159,8 @@ export function ProductBuy({ scent: s }: { scent: Scent }) {
             <span className="font-medium">Add to bag</span><span className="price">{money(price)}</span>
           </button>
         </div>
+
+        <p className="meta mt-4 md:mt-3">Mixed within 48 hours · Name, city and date printed on every bottle · Ships the next weekday after filling</p>
 
         {/* Tabs */}
         <div className="mt-12">

@@ -1,3 +1,4 @@
+import { lineQty } from "../cart-types";
 /**
  * Shopify Storefront API adapter (for when the store exists).
  * Each cart line carries its personalization and formula as line attributes, which flow to the
@@ -45,7 +46,7 @@ export const shopifyPayments: PaymentProvider = {
       headers: { "Content-Type": "application/json", "X-Shopify-Storefront-Access-Token": token },
       body: JSON.stringify({
         query: CART_CREATE,
-        variables: { input: { lines: lines.map((l) => ({ merchandiseId: VARIANTS[l.sku], quantity: 1, attributes: attributes(l, ctx) })) } },
+        variables: { input: { lines: lines.map((l) => ({ merchandiseId: VARIANTS[l.sku], quantity: lineQty(l), attributes: attributes(l, ctx) })) } },
       }),
     });
     const json = await res.json();

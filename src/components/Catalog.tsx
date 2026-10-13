@@ -33,7 +33,8 @@ export function Catalog() {
   return (
     <>
       <div className="mb-9 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by family">
+        <div className="flex flex-wrap items-center gap-2" role="group" aria-labelledby="family-filter">
+          <span id="family-filter" className="mr-1 text-[15px] text-muted">Filter</span>
           {(["All", ...FAMILIES] as const).map((f) => (
             <button key={f} className="chip" aria-pressed={family === f} onClick={() => changeFamily(f)}>{f}</button>
           ))}

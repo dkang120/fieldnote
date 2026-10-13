@@ -13,9 +13,16 @@ interface LineBase {
   id: string;
   sku: string;
   title: string;
+  /** Unit price. */
   price: number;
   tint: string;
+  /** Identical bottles with the same label; missing means 1. */
+  qty?: number;
 }
+
+export const QTY_MAX = 5;
+export const lineQty = (l: { qty?: number }) => l.qty ?? 1;
+export const lineTotal = (l: { price: number; qty?: number }) => l.price * lineQty(l);
 
 export interface HouseLine extends LineBase {
   kind: "house";
@@ -53,8 +60,26 @@ export function toItem(line: CartLine): Item {
     item_category: line.kind,
     item_variant: "size" in line ? `${line.size}ml` : undefined,
     price: line.price,
-    quantity: 1,
+    quantity: lineQty(line),
   };
+}
+
+/** Characters the label printer can't print are removed; length is checked separately so nothing is cut off silently. */
+export const stripLabelText = (s: string) => s.replace(/[^\p{L}\p{N} .,'&\-]/gu, "").replace(/\s+/g, " ").trimStart();
+
+export const LABEL_LIMIT_MSG = {
+  name: `Keep the name to ${20} characters. Initials work, like Avery M.`,
+  city: `Keep the city to ${18} characters, such as Los Angeles, CA.`,
+  message: `Keep the card message to ${40} characters.`,
+} as const;
+
+/** First problem that would stop this label from printing, or null. */
+export function labelProblem(p: Personalization): { field: keyof Personalization; message: string } | null {
+  if (!p.name.trim()) return { field: "name", message: "Add the name for your label, such as Avery M." };
+  if (p.name.trim().length > NAME_MAX) return { field: "name", message: LABEL_LIMIT_MSG.name };
+  if (p.city.trim().length > CITY_MAX) return { field: "city", message: LABEL_LIMIT_MSG.city };
+  if (p.message.trim().length > MESSAGE_MAX) return { field: "message", message: LABEL_LIMIT_MSG.message };
+  return null;
 }
 
 /** Strip characters a thermal label can't print and trim to length. */

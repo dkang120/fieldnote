@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
 
 const NAV = [
@@ -20,7 +20,15 @@ export function Header() {
   const { lines, setOpen } = useCart();
   const [menu, setMenu] = useState(false);
   const path = usePathname();
+  const menuBtn = useRef<HTMLButtonElement>(null);
   useEffect(() => setMenu(false), [path]);
+  // Escape closes the phone menu and puts focus back on the Menu button.
+  useEffect(() => {
+    if (!menu) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { setMenu(false); menuBtn.current?.focus(); } };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menu]);
   const isActive = (href: string) => path?.startsWith(href.replace(/\/$/, ""));
   /* Product pages carry their own floating back/bag pills on phones, so the header steps aside there. */
   const bare = /^\/scents\/[^/]+\/?$/.test(path ?? "") ? "max-md:hidden" : "";
@@ -34,7 +42,7 @@ export function Header() {
       <header className={`sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur ${bare}`}>
         <div className="wrap relative grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-4">
           <div>
-            <button className="min-h-[44px] pr-3 text-[15px] lg:hidden" aria-expanded={menu} aria-controls="site-nav" onClick={() => setMenu((m) => !m)}>
+            <button ref={menuBtn} className="min-h-[44px] pr-3 text-[15px] lg:hidden" aria-expanded={menu} aria-controls="site-nav" onClick={() => setMenu((m) => !m)}>
               {menu ? "Close" : "Menu"}
             </button>
             <nav

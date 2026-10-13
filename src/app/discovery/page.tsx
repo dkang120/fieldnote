@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SCENTS } from "@/lib/scents";
 import { VialRow } from "@/components/VialRow";
-import { Plus } from "@/components/icons";
+import { Check, Plus } from "@/components/icons";
 import { AddDiscovery } from "@/components/AddDiscovery";
 import { JsonLd } from "@/components/JsonLd";
 import { PRICES, SITE, money } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Discovery Set",
-  description: `All six Fieldnote house scents in 2 ml vials for ${money(PRICES.discovery)}, credited toward your first full bottle.`,
+  title: { absolute: "Discovery Set | Six Fieldnote scents" },
+  description: `Try all six Fieldnote house scents in 2 ml vials. Your ${money(PRICES.discovery)} Discovery Set is applied to your first full bottle.`,
   alternates: { canonical: "/discovery/" },
 };
 
@@ -29,6 +29,11 @@ export default function DiscoveryPage() {
           <h1 className="mb-2 text-display">Discovery Set</h1>
           <p className="mb-5 text-[17px] text-muted">All six house scents, 2 ml each.</p>
           <p className="price mb-5 text-xl">{money(PRICES.discovery)} <span className="meta">Credited to your first full bottle</span></p>
+          <ul className="mb-5 grid gap-1.5 text-[15px]">
+            {["Includes all six house scents", `${money(PRICES.discovery)} applied to your first full bottle`, "The easiest first order if you can't smell them in person"].map((t) => (
+              <li key={t} className="flex items-start gap-2"><Check className="mt-0.5 size-4 flex-none" />{t}</li>
+            ))}
+          </ul>
           <p className="text-muted">Each vial holds about 30 sprays, enough to wear a scent for a few days and see how it wears on you. When you order a full bottle, we take the {money(PRICES.discovery)} off.</p>
           <AddDiscovery />
           <p className="meta">Ships in a padded mailer for $4.50, or free with a full bottle.</p>

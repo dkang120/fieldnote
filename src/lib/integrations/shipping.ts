@@ -1,3 +1,4 @@
+import { lineTotal } from "../cart-types";
 import { FREE_SHIP_THRESHOLD } from "../site";
 import type { CartLine } from "../cart-types";
 import type { ShippingProvider, ShippingQuote } from "./types";
@@ -9,7 +10,7 @@ const SAMPLES_ONLY = 4.5;
 export const flatRateShipping: ShippingProvider = {
   id: "flat-rate",
   quote(lines: CartLine[]): ShippingQuote {
-    const subtotal = lines.reduce((s, l) => s + l.price, 0);
+    const subtotal = lines.reduce((s, l) => s + lineTotal(l), 0);
     const hasBottle = lines.some((l) => l.kind !== "discovery");
     const free = subtotal >= FREE_SHIP_THRESHOLD;
     return {

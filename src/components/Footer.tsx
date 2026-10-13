@@ -9,8 +9,8 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
           <div className="col-span-2 md:col-span-1">
             <h2 className="mb-3 font-sans text-[15px] font-medium">Letters from the bench</h2>
-            <p className="mb-4 text-[15px] text-muted">New scents, campus pop-up dates, and 10% off your first bottle.</p>
-            <Newsletter source="footer" />
+            <p className="mb-4 text-[15px] text-muted">New scents, campus pop-up dates, process notes, and 10% off your first bottle.</p>
+            <Newsletter source="footer" cta="Get bench letters" />
           </div>
           <div>
             <h2 className="mb-3 font-sans text-[15px] font-medium">Shop</h2>

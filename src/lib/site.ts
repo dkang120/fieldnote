@@ -3,7 +3,7 @@ export const SITE = {
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://dkang120.github.io/fieldnote").replace(/\/$/, ""),
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
   description:
-    "Fieldnote mixes every bottle of cologne after you order and labels it with your name, city and date. Six house scents from $78, or build your own.",
+    "Fieldnote makes cologne after you order it. Choose a house scent or build your own, then add your name, city, and made-on date to the label.",
   email: "hello@fieldnote.studio",
 };
 
@@ -16,7 +16,7 @@ export const PRICES = {
 export type Size = 50 | 100;
 export const FREE_SHIP_THRESHOLD = 75;
 
-export const money = (n: number) => `$${n.toFixed(0)}`;
+export const money = (n: number) => `$${Number.isInteger(n) ? n.toFixed(0) : n.toFixed(2)}`;
 
 /** Prefix a public asset path with the base path (needed for plain <img>/<a> outside next/link). */
 export const asset = (p: string) => `${SITE.basePath}${p}`;

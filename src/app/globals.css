@@ -13,7 +13,8 @@
 }
 
 @layer base {
-  html { -webkit-text-size-adjust: 100%; }
+  /* Keeps focused fields clear of the sticky header and the pinned Add to bag bar. */
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 88px; scroll-padding-bottom: 96px; }
   body { @apply bg-canvas text-ink font-sans antialiased; font-size: 16px; line-height: 1.6; overflow-x: clip; }
   h1, h2, h3 { @apply font-normal; text-wrap: balance; }
   b, strong { font-weight: 500; }

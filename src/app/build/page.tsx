@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import { Builder } from "@/components/Builder";
 
 export const metadata: Metadata = {
-  title: "Create your own cologne",
-  description: "Answer six questions, tune your base with up to three notes, and name it. Your custom cologne is mixed after you order and your formula is saved for reorders.",
+  title: "Build your own cologne",
+  description: "Build a made-to-order Fieldnote cologne in six questions. Tune your notes, name your scent, and save your formula for easy reorders.",
   alternates: { canonical: "/build/" },
 };
 

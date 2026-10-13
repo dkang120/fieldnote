@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Catalog } from "@/components/Catalog";
+import { ScentFinder } from "@/components/ScentFinder";
 import { PRICES, money } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "House scents",
-  description: "Six eaux de parfum, each mixed after you order and labeled with your name. 50 ml $78, 100 ml $128.",
+  title: { absolute: "House scents | Fieldnote cologne" },
+  description: "Explore six made-to-order Fieldnote house scents. Each bottle is hand mixed, freshly filled, and labeled with your name, city, and date.",
   alternates: { canonical: "/scents/" },
 };
 
@@ -14,8 +15,9 @@ export default function ScentsPage() {
     <>
       <section className="py-10 md:py-16">
         <div className="wrap">
-          <h1 className="mb-4 text-display">House scents</h1>
+          <h1 className="mb-4 text-display">The house scents</h1>
           <p className="lede mb-10">Six eaux de parfum, built to be worn every day. Each one is mixed for you after you order and labeled with your name.</p>
+          <div className="mb-14"><ScentFinder /></div>
           <Catalog />
         </div>
       </section>

@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState, type ReactNode } from "react";
 import type { CartLine, NewCartLine } from "./cart-types";
-import { toItem } from "./cart-types";
+import { QTY_MAX, lineQty, lineTotal, toItem } from "./cart-types";
 import { track } from "./analytics";
 
 type State = { lines: CartLine[]; hydrated: boolean };
@@ -10,6 +10,7 @@ type Action =
   | { type: "hydrate"; lines: CartLine[] }
   | { type: "add"; line: CartLine }
   | { type: "remove"; id: string }
+  | { type: "qty"; id: string; qty: number }
   | { type: "clear" };
 
 function reducer(state: State, a: Action): State {
@@ -17,6 +18,7 @@ function reducer(state: State, a: Action): State {
     case "hydrate": return { lines: a.lines, hydrated: true };
     case "add": return { ...state, lines: [...state.lines, a.line] };
     case "remove": return { ...state, lines: state.lines.filter((l) => l.id !== a.id) };
+    case "qty": return { ...state, lines: state.lines.map((l) => (l.id === a.id ? { ...l, qty: a.qty } : l)) };
     case "clear": return { ...state, lines: [] };
   }
 }
@@ -30,6 +32,7 @@ interface CartApi {
   setOpen: (o: boolean) => void;
   add: (line: NewCartLine) => void;
   remove: (id: string) => void;
+  setQty: (id: string, qty: number) => void;
   clear: () => void;
   toast: (msg: string) => void;
   toastMsg: string | null;
@@ -54,7 +57,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     try { localStorage.setItem(KEY, JSON.stringify(state.lines)); } catch { /* storage blocked */ }
   }, [state]);
 
-  const subtotal = useMemo(() => state.lines.reduce((s, l) => s + l.price, 0), [state.lines]);
+  const subtotal = useMemo(() => state.lines.reduce((s, l) => s + lineTotal(l), 0), [state.lines]);
 
   const toast = useCallback((msg: string) => {
     setToastMsg(msg);
@@ -64,7 +67,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const setOpen = useCallback((o: boolean) => {
     setOpenState(o);
-    if (o) track("view_cart", { currency: "USD", value: state.lines.reduce((s, l) => s + l.price, 0), items: state.lines.map(toItem) });
+    if (o) track("view_cart", { currency: "USD", value: state.lines.reduce((s, l) => s + lineTotal(l), 0), items: state.lines.map(toItem) });
   }, [state.lines]);
 
   const add = useCallback((line: NewCartLine) => {
@@ -77,14 +80,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const remove = useCallback((id: string) => {
     const line = state.lines.find((l) => l.id === id);
     dispatch({ type: "remove", id });
-    if (line) track("remove_from_cart", { currency: "USD", value: line.price, items: [toItem(line)] });
+    if (line) track("remove_from_cart", { currency: "USD", value: lineTotal(line), items: [toItem(line)] });
+  }, [state.lines]);
+
+  const setQty = useCallback((id: string, qty: number) => {
+    const line = state.lines.find((l) => l.id === id);
+    if (!line) return;
+    const next = Math.max(1, Math.min(QTY_MAX, qty));
+    const delta = next - lineQty(line);
+    if (!delta) return;
+    dispatch({ type: "qty", id, qty: next });
+    const item = { ...toItem(line), quantity: Math.abs(delta) };
+    track(delta > 0 ? "add_to_cart" : "remove_from_cart", { currency: "USD", value: line.price * Math.abs(delta), items: [item] });
   }, [state.lines]);
 
   const clear = useCallback(() => dispatch({ type: "clear" }), []);
 
   const api = useMemo<CartApi>(
-    () => ({ lines: state.lines, subtotal, open, setOpen, add, remove, clear, toast, toastMsg }),
-    [state.lines, subtotal, open, setOpen, add, remove, clear, toast, toastMsg],
+    () => ({ lines: state.lines, subtotal, open, setOpen, add, remove, setQty, clear, toast, toastMsg }),
+    [state.lines, subtotal, open, setOpen, add, remove, setQty, clear, toast, toastMsg],
   );
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
 }

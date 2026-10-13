@@ -12,7 +12,7 @@ Before pushing: `npm run typecheck && npm run lint && npm run build`.
 ## Brand rules (keep these)
 - Palette: monochrome, no accent. CSS variables on `:root` in `src/app/globals.css`, mapped in tailwind.config.ts: canvas `#E6E5E3` (page), surface `#F2F1EF` (cards, tiles), ink `#111111` (text, solid blocks, buttons), muted `#6B6B6B`, line `#CFCDC9`, on-ink `#F2F1EF` (text on black bands). Photos go grayscale (`img.photo`); the bottle SVG renders scent tints as neutral grays.
 - Type: Figtree only (Outfit fallback), 400 for nearly everything, 500 max, sentence case, no wide tracking. Body 16px, product titles 17–18px/1.45, prices 17px, meta 13px. Exceptions: the hero FIELDNOTE wordmark (Figtree 700, tight tracking) and the oval label inside `Bottle.tsx`, which keeps Instrument Serif + IBM Plex Mono so it reads as a printed label.
-- Shop layout follows Aritzia: 3:4 tiles with name + bookmark, price, size dots, no cards; product page is a full-bleed bottle with floating pills, a bottom-sheet panel on phones, settings rows with chevrons, pill tabs (Details / Notes / Reviews, reviews stay an empty state until real ones exist) and a black pill Add to bag bar. Pills for buttons and tabs, square image tiles.
+- Shop layout follows Aritzia: 3:4 tiles with number + family, name + bookmark, three key notes, a plain mood line, price and an "Explore scent" link (nothing hover-only), no cards; product page is a full-bleed bottle with floating pills, a bottom-sheet panel on phones, settings rows with chevrons, pill tabs (Details / Notes / Reviews, reviews stay an empty state until real ones exist) and a black pill Add to bag bar. Pills for buttons and tabs, square image tiles.
 - Home layout follows a GAZU-style editorial store: giant FIELDNOTE wordmark with the bottle layered over it, black category band, split label section, trust row, house-scents grid. Placeholder images live in `public/assets/` (swap with same filenames).
 - Inspiration: Aritzia for type and shop layout, GAZU for the home hero, Diptyque for the oval label. Le Labo for the made-for-you ritual.
 - The signature element is the bottle SVG with the oval label (`src/components/Bottle.tsx`) — live name/city/date. Protect it.
@@ -23,6 +23,11 @@ Before pushing: `npm run typecheck && npm run lint && npm run build`.
 
 ## Motion
 `motion` (motion/react) with `MotionConfig reducedMotion="user"` in `src/components/MotionProvider.tsx`. One authored moment per page: home hero (wordmark opens, bottle sets down), scents grid re-flows on filter, product size switch re-seats the bottle, Discovery vials stand up in order, How it's made rule draws with scroll, builder steps arrive from the right. Content is visible before hydration; no scattered scroll reveals. Icons are one SVG stroke family in `src/components/icons`.
+
+## Conversion helpers
+- Primary CTA site-wide is "Find your scent" → `/scents/#find` (`ScentFinder`, two questions, one pick + two alternatives + "Try all six first"). The Discovery Set is the "start here" path.
+- Label name/city persist across pages via `src/lib/personalization.ts`; `labelProblem()` in `cart-types.ts` blocks bottles that won't print, with errors that say how to fix them.
+- Unconfirmed policies and content are listed in `docs/LAUNCH-GAPS.md`. Don't add claims that aren't there.
 
 ## Where things live
 - `src/lib/scents.ts` — six house scents (names are final: Library Musk, Fig Study, Field Vetiver, Late Tea, Salt Hour, Worn Leather)

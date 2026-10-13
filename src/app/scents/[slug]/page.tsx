@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { SCENTS, getScent } from "@/lib/scents";
+import { SCENTS, getScent, shortNotes } from "@/lib/scents";
 import { ProductBuy } from "@/components/ProductBuy";
 import { ScentCard } from "@/components/ScentCard";
 import { JsonLd } from "@/components/JsonLd";
@@ -12,8 +12,8 @@ export function generateStaticParams() { return SCENTS.map((s) => ({ slug: s.slu
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const s = getScent(params.slug);
   if (!s) return {};
-  const description = `${s.name}: ${s.notes.top.toLowerCase()}, ${s.notes.heart.toLowerCase()}, ${s.notes.base.toLowerCase()}. Mixed after you order and labeled with your name. From $${PRICES.house[50]}.`;
-  return { title: `${s.name} cologne`, description, alternates: { canonical: `/scents/${s.slug}/` }, openGraph: { title: `${s.name} | Fieldnote`, description } };
+  const description = `${s.name} is a made-to-order Fieldnote cologne with ${shortNotes(s).toLowerCase()}. Mixed by hand and labeled with your name, city, and date. From $${PRICES.house[50]}.`;
+  return { title: `${s.name} cologne | Made to order`, description, alternates: { canonical: `/scents/${s.slug}/` }, openGraph: { title: `${s.name} | Fieldnote`, description } };
 }
 
 export default function ScentPage({ params }: { params: { slug: string } }) {
