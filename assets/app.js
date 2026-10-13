@@ -123,7 +123,7 @@ function vialSVG(scent) {
 
 /* ---------- shared chrome ---------- */
 function chrome() {
-  const page = document.body.dataset.page;
+  const page = $("main")?.dataset.page;
   const link = (href, label, key) => `<a href="${href}"${page === key ? ' aria-current="page"' : ""}>${label}</a>`;
   document.body.insertAdjacentHTML("afterbegin", `
     <a class="sr" href="#main">Skip to content</a>
@@ -309,5 +309,5 @@ function initMade() {
 
 document.addEventListener("DOMContentLoaded", () => {
   chrome();
-  ({ home: initHome, scents: initCatalog, product: initProduct, discovery: initDiscovery, made: initMade })[document.body.dataset.page]?.();
+  ({ home: initHome, scents: initCatalog, product: initProduct, discovery: initDiscovery, made: initMade })[$("main")?.dataset.page]?.();
 });
