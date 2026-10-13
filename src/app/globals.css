@@ -2,33 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Monochrome palette. Tailwind colors read these (as "R G B" channels), so change values here only. */
+:root {
+  --canvas: 230 229 227;  /* #E6E5E3 page background */
+  --surface: 242 241 239; /* #F2F1EF cards, tiles */
+  --ink: 17 17 17;        /* #111111 text, solid blocks, buttons */
+  --muted: 107 107 107;   /* #6B6B6B secondary text */
+  --line: 207 205 201;    /* #CFCDC9 hairlines */
+  --on-ink: 242 241 239;  /* #F2F1EF text on inverted bands */
+}
+
 @layer base {
   html { -webkit-text-size-adjust: 100%; }
-  body { @apply bg-paper text-ink font-sans antialiased; font-size: 17px; line-height: 1.55; }
+  body { @apply bg-canvas text-ink font-sans antialiased; font-size: 17px; line-height: 1.55; overflow-x: clip; }
   h1, h2, h3 { @apply font-serif font-normal; text-wrap: balance; }
-  :focus-visible { outline: 2px solid theme("colors.clay.DEFAULT"); outline-offset: 3px; }
+  :focus-visible { outline: 2px solid rgb(var(--ink)); outline-offset: 3px; }
+  .bg-ink :focus-visible { outline-color: rgb(var(--on-ink)); }
+  img.photo { filter: grayscale(1); }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
 }
 
 @layer components {
   .wrap { @apply mx-auto w-full max-w-site px-4 sm:px-8 lg:px-12; }
+  /* Solid black, square-cornered; hover inverts to outline. */
   .btn {
-    @apply inline-flex min-h-[50px] items-center justify-center gap-2 whitespace-nowrap rounded-full border border-ink bg-ink px-6
-           text-base font-medium text-paper no-underline transition-colors duration-200 hover:border-clay-deep hover:bg-clay-deep
-           disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-ink disabled:hover:border-ink;
+    @apply inline-flex min-h-[50px] items-center justify-center gap-2 whitespace-nowrap border border-ink bg-ink px-7
+           font-mono text-[13px] font-medium uppercase tracking-[0.14em] text-on-ink no-underline transition-colors duration-200
+           hover:bg-transparent hover:text-ink
+           disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-ink disabled:hover:text-on-ink;
   }
-  .btn-ghost { @apply bg-transparent text-ink hover:border-ink hover:bg-ink hover:text-paper; }
+  .btn-ghost { @apply bg-transparent text-ink hover:bg-ink hover:text-on-ink; }
+  .link-line {
+    @apply border-b border-current pb-1 font-mono text-[13px] font-medium uppercase tracking-[0.14em] no-underline
+           transition-opacity hover:opacity-60;
+  }
+  .eyebrow { @apply font-mono text-xs uppercase tracking-[0.28em]; }
   .input {
-    @apply min-h-[48px] w-full rounded border border-rule bg-[#FBF9F4] px-3.5 text-base text-ink placeholder:text-stone
+    @apply min-h-[48px] w-full rounded-none border border-line bg-surface px-3.5 text-base text-ink placeholder:text-muted
            focus:border-ink focus:outline-none;
   }
-  .lede { @apply max-w-[46ch] text-lg text-ink-soft md:text-xl; }
-  .meta { @apply text-sm text-stone; }
+  .lede { @apply max-w-[46ch] text-lg text-muted md:text-xl; }
+  .meta { @apply text-sm text-muted; }
   .section { @apply py-16 md:py-28; }
   .chip {
-    @apply min-h-[40px] cursor-pointer rounded-full border border-rule bg-transparent px-4 text-[15px]
-           aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-paper;
+    @apply min-h-[40px] cursor-pointer rounded-full border border-line bg-transparent px-4 text-[15px]
+           aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-on-ink;
   }
+  /* Fade-up on scroll; Reveal.tsx adds .is-in. Without JS or with reduced motion, content just shows. */
+  .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  .js .reveal.is-in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .js .reveal { opacity: 1; transform: none; } }
+  .zoom { @apply overflow-hidden; }
+  .zoom img, .zoom svg { transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+  .zoom:hover img, .zoom:hover svg, .group:hover .zoom img, .group:hover .zoom svg { transform: scale(1.04); }
 }
 
 @keyframes settle { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }

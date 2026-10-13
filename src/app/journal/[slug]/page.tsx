@@ -44,7 +44,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         </div>
       </article>
       {related.length > 0 && (
-        <section className="bg-paper-deep py-12 md:py-20">
+        <section className="bg-surface py-12 md:py-20">
           <div className="wrap">
             <h2 className="mb-8 text-h2">Scents in this story</h2>
             <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:gap-x-7">

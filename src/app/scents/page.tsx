@@ -19,7 +19,7 @@ export default function ScentsPage() {
           <Catalog />
         </div>
       </section>
-      <section className="bg-paper-deep py-12 md:py-20">
+      <section className="bg-surface py-12 md:py-20">
         <div className="wrap grid items-center gap-6 md:grid-cols-2">
           <h2 className="text-h2">Can't choose?</h2>
           <div>

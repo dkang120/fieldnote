@@ -25,9 +25,9 @@ export function Newsletter({ source, cta = "Sign up", tone = "light" }: { source
       <div className="flex flex-col gap-2 sm:flex-row">
         <label htmlFor={id} className="sr-only">Email</label>
         <input id={id} type="email" className="input" placeholder="you@school.edu" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <button className={`btn ${tone === "dark" ? "btn-ghost border-paper text-paper hover:bg-paper hover:text-ink" : ""}`} type="submit">{cta}</button>
+        <button className={`btn ${tone === "dark" ? "btn-ghost border-on-ink text-on-ink hover:bg-on-ink hover:text-ink" : ""}`} type="submit">{cta}</button>
       </div>
-      {error && <p className={`mt-2 text-sm ${tone === "dark" ? "text-kraft" : "text-clay-deep"}`} role="alert">{error}</p>}
+      {error && <p className={`mt-2 text-sm ${tone === "dark" ? "text-line" : "text-ink"}`} role="alert">{error}</p>}
     </form>
   );
 }

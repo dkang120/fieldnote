@@ -18,11 +18,11 @@ export default function JournalPage() {
         <p className="lede mb-12">Notes from the bench: what things smell like, how to wear them, and why we work the way we do.</p>
         <ol className="border-t border-ink">
           {[...POSTS].sort((a, b) => b.date.localeCompare(a.date)).map((p) => (
-            <li key={p.slug} className="border-b border-rule">
+            <li key={p.slug} className="border-b border-line">
               <Link href={`/journal/${p.slug}/`} className="grid gap-2 py-8 no-underline md:grid-cols-[180px_1fr_1fr] md:gap-8">
                 <time dateTime={p.date} className="meta">{fmt(p.date)}</time>
                 <h2 className="text-h3 underline-offset-4 hover:underline">{p.title}</h2>
-                <p className="text-ink-soft">{p.description}</p>
+                <p className="text-muted">{p.description}</p>
               </Link>
             </li>
           ))}

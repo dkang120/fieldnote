@@ -9,11 +9,11 @@ const ITEM = { item_id: "DS-06", item_name: "Discovery Set", item_category: "dis
 export function AddDiscovery() {
   const { add } = useCart();
   useEffect(() => { track("view_item", { currency: "USD", value: PRICES.discovery, items: [ITEM] }); }, []);
-  const go = () => add({ kind: "discovery", sku: "DS-06", title: "Discovery Set", price: PRICES.discovery, tint: "#DFE1D2" });
+  const go = () => add({ kind: "discovery", sku: "DS-06", title: "Discovery Set", price: PRICES.discovery, tint: "#D9D9D9" });
   return (
     <>
       <button className="btn my-3 w-full" onClick={go}>Add to bag, {money(PRICES.discovery)}</button>
-      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 border-t border-rule bg-paper px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 border-t border-line bg-canvas px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 md:hidden">
         <span>{money(PRICES.discovery)}</span>
         <button className="btn flex-1" onClick={go}>Add to bag</button>
       </div>

@@ -37,7 +37,7 @@ export function Catalog() {
             <button key={f} className="chip" aria-pressed={family === f} onClick={() => changeFamily(f)}>{f}</button>
           ))}
         </div>
-        <label className="flex items-center gap-2 text-[15px] text-ink-soft">
+        <label className="flex items-center gap-2 text-[15px] text-muted">
           Sort
           <select className="input min-h-[40px] w-auto py-0 pr-8" value={sort} onChange={(e) => changeSort(e.target.value as SortKey)}>
             {(Object.keys(SORTS) as SortKey[]).map((k) => <option key={k} value={k}>{SORTS[k].label}</option>)}

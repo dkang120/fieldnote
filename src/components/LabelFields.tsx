@@ -28,22 +28,22 @@ export function LabelFields({ value, onChange, surface, showMessage = true, name
     }
   };
 
-  const count = (s: string, max: number) => <span className="text-stone">{s.length}/{max}</span>;
+  const count = (s: string, max: number) => <span className="text-muted">{s.length}/{max}</span>;
 
   return (
     <div className="grid gap-3.5">
       <div>
-        <label htmlFor={`${idPrefix}-name`} className="mb-1.5 flex justify-between text-sm text-ink-soft">
+        <label htmlFor={`${idPrefix}-name`} className="mb-1.5 flex justify-between text-sm text-muted">
           Name on the label {count(value.name, NAME_MAX)}
         </label>
         <input
           id={`${idPrefix}-name`} className="input" value={value.name} onChange={set("name", NAME_MAX)} maxLength={NAME_MAX}
           placeholder="e.g. Daniel K." autoComplete="name" aria-invalid={!!nameError} aria-describedby={nameError ? `${idPrefix}-name-err` : undefined}
         />
-        {nameError && <p id={`${idPrefix}-name-err`} className="mt-1.5 text-sm text-clay-deep">{nameError}</p>}
+        {nameError && <p id={`${idPrefix}-name-err`} className="mt-1.5 text-sm text-ink">{nameError}</p>}
       </div>
       <div>
-        <label htmlFor={`${idPrefix}-city`} className="mb-1.5 flex justify-between text-sm text-ink-soft">
+        <label htmlFor={`${idPrefix}-city`} className="mb-1.5 flex justify-between text-sm text-muted">
           City {count(value.city, CITY_MAX)}
         </label>
         <input
@@ -52,7 +52,7 @@ export function LabelFields({ value, onChange, surface, showMessage = true, name
         />
         {hint && !value.city && (
           <button
-            type="button" className="mt-1.5 text-sm text-ink-soft underline underline-offset-4 hover:text-ink"
+            type="button" className="mt-1.5 text-sm text-muted underline underline-offset-4 hover:text-ink"
             onClick={() => { onChange({ ...value, city: hint }); track("label_preview_edit", { field: "city", surface }); }}
           >
             Use {hint}
@@ -61,8 +61,8 @@ export function LabelFields({ value, onChange, surface, showMessage = true, name
       </div>
       {showMessage && (
         <div>
-          <label htmlFor={`${idPrefix}-msg`} className="mb-1.5 flex justify-between text-sm text-ink-soft">
-            <span>Card message <span className="text-stone">(optional, printed on the card in the box)</span></span>
+          <label htmlFor={`${idPrefix}-msg`} className="mb-1.5 flex justify-between text-sm text-muted">
+            <span>Card message <span className="text-muted">(optional, printed on the card in the box)</span></span>
             {count(value.message, MESSAGE_MAX)}
           </label>
           <input

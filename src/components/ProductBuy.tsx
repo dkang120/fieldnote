@@ -31,7 +31,7 @@ export function ProductBuy({ scent: s, children, after }: { scent: Scent; childr
 
   return (
     <div className="grid items-start gap-8 pb-20 pt-4 md:grid-cols-[1.1fr_1fr] md:gap-16 md:pt-8">
-      <div className="grid aspect-square place-items-center rounded md:sticky md:top-[88px] md:aspect-[4/5]" style={{ background: s.bg }}>
+      <div className="grid aspect-square place-items-center rounded bg-surface md:sticky md:top-[88px] md:aspect-[4/5]">
         <Bottle title={s.name} no={s.no} tint={s.tint} name={p.name} city={p.city} size={size} date={dates?.compounded ?? null} className="w-[42%] md:w-[54%]" />
       </div>
       <div className="min-w-0">
@@ -42,14 +42,14 @@ export function ProductBuy({ scent: s, children, after }: { scent: Scent; childr
           {([50, 100] as const).map((z) => (
             <button
               key={z} aria-pressed={size === z} onClick={() => setSize(z)}
-              className="flex min-h-[56px] items-center justify-between rounded border border-rule px-3.5 text-left aria-pressed:border-ink aria-pressed:shadow-[inset_0_0_0_1px_#1C1B19]"
+              className="flex min-h-[56px] items-center justify-between rounded border border-line px-3.5 text-left aria-pressed:border-ink aria-pressed:shadow-[inset_0_0_0_1px_rgb(var(--ink))]"
             >
               <span>{z} ml</span><span className="tabular-nums">{money(PRICES.house[z])}</span>
             </button>
           ))}
         </div>
 
-        <div className="border-t border-rule pt-5">
+        <div className="border-t border-line pt-5">
           <h2 className="mb-1 text-[22px]">Your label</h2>
           <p className="meta mb-4">The bottle updates as you type.</p>
           <LabelFields value={p} onChange={(v) => { setP(v); if (v.name) setNameError(null); }} surface="product" nameError={nameError} idPrefix="pdp" />
@@ -60,7 +60,7 @@ export function ProductBuy({ scent: s, children, after }: { scent: Scent; childr
         {after}
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 border-t border-rule bg-paper px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 md:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 border-t border-line bg-canvas px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 md:hidden">
         <span className="tabular-nums">{money(price)}</span>
         <button className="btn flex-1" onClick={addToBag}>Add to bag</button>
       </div>

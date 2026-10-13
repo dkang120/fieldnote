@@ -1,18 +1,20 @@
 import type { Config } from "tailwindcss";
 
-/* Fieldnote tokens: paper, ink, kraft, stone, clay.
-   Serif carries the voice, grotesk does the work, mono appears only where a label prints. */
+/* Fieldnote tokens: monochrome. Values live as CSS variables on :root (globals.css).
+   Serif carries the voice, grotesk does the work, mono appears where a label or metadata prints. */
+const v = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
+
 export default {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        paper: { DEFAULT: "#F3EFE7", deep: "#E9E3D7", tag: "#F7F3EA" },
-        ink: { DEFAULT: "#1C1B19", soft: "#4A4741" },
-        stone: "#8B877F",
-        kraft: "#C9B796",
-        clay: { DEFAULT: "#A95F3B", deep: "#8C4B2C" },
-        rule: "rgba(28,27,25,0.16)",
+        surface: v("surface"),
+        ink: v("ink"),
+        muted: v("muted"),
+        line: v("line"),
+        "on-ink": v("on-ink"),
+        canvas: v("canvas"),
       },
       fontFamily: {
         serif: ['"Instrument Serif"', '"Times New Roman"', "serif"],

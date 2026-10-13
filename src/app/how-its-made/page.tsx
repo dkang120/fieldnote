@@ -41,22 +41,22 @@ export default function MadePage() {
         <div className="wrap">
           <ol className="border-t border-ink">
             {LOG.map(([t, h, p]) => (
-              <li key={h} className="grid gap-2 border-b border-rule py-7 md:grid-cols-[130px_1fr_1.2fr] md:items-baseline md:gap-6">
-                <span className="font-mono text-sm text-clay">{t}</span>
+              <li key={h} className="grid gap-2 border-b border-line py-7 md:grid-cols-[130px_1fr_1.2fr] md:items-baseline md:gap-6">
+                <span className="font-mono text-sm text-ink">{t}</span>
                 <h2 className="text-[26px] leading-tight">{h}</h2>
-                <p className="text-ink-soft">{p}</p>
+                <p className="text-muted">{p}</p>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className="section bg-ink text-paper">
+      <section className="section bg-ink text-on-ink">
         <div className="wrap">
           <h2 className="mb-10 text-h2">Shelf bottle or Fieldnote</h2>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[520px] border-collapse text-left">
-              <thead><tr className="text-sm text-[#B9B3A8]"><th className="py-3 font-normal" /><th className="py-3 font-normal">A typical bottle</th><th className="py-3 font-normal">Fieldnote</th></tr></thead>
+              <thead><tr className="text-sm text-on-ink/70"><th className="py-3 font-normal" /><th className="py-3 font-normal">A typical bottle</th><th className="py-3 font-normal">Fieldnote</th></tr></thead>
               <tbody>
                 {[
                   ["When it's made", "Months before you buy it", "Within 48 hours after you order"],
@@ -65,8 +65,8 @@ export default function MadePage() {
                   ["Reordering", "Hope it's still in stock", "Your formula code is saved"],
                   ["50 ml price", "Often $150 to $250 for niche brands", "$78, or $108 custom"],
                 ].map(([k, a, b]) => (
-                  <tr key={k} className="border-t border-paper/20 align-top">
-                    <td className="w-[34%] py-4 pr-3 text-[#B9B3A8]">{k}</td><td className="py-4 pr-3">{a}</td><td className="py-4">{b}</td>
+                  <tr key={k} className="border-t border-on-ink/20 align-top">
+                    <td className="w-[34%] py-4 pr-3 text-on-ink/70">{k}</td><td className="py-4 pr-3">{a}</td><td className="py-4">{b}</td>
                   </tr>
                 ))}
               </tbody>
@@ -80,19 +80,19 @@ export default function MadePage() {
           <h2 className="text-h2">What's inside</h2>
           <div>
             <p className="lede mb-4">Eau de parfum at 15 to 18 percent fragrance concentrate, blended into perfumer's alcohol.</p>
-            <p className="text-ink-soft">Our concentrates come from a fragrance house that certifies every accord to IFRA safety standards. Custom blends use only note combinations we've already tested together. A full ingredient list is printed on each box.</p>
+            <p className="text-muted">Our concentrates come from a fragrance house that certifies every accord to IFRA safety standards. Custom blends use only note combinations we've already tested together. A full ingredient list is printed on each box.</p>
           </div>
         </div>
       </section>
 
-      <section className="section bg-paper-deep" id="faq">
+      <section className="section bg-surface" id="faq">
         <div className="wrap grid gap-8 md:grid-cols-2 md:gap-20">
           <h2 className="text-h2">Questions</h2>
           <div>
             {FAQ.map(([q, a]) => (
-              <details key={q} className="group border-b border-rule">
+              <details key={q} className="group border-b border-line">
                 <summary className="flex cursor-pointer list-none justify-between gap-4 py-4 [&::-webkit-details-marker]:hidden">{q}<span aria-hidden className="text-[22px] leading-none transition-transform group-open:rotate-45">+</span></summary>
-                <p className="pb-4 text-ink-soft">{a}</p>
+                <p className="pb-4 text-muted">{a}</p>
               </details>
             ))}
           </div>
