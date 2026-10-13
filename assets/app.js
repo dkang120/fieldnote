@@ -130,7 +130,7 @@ function chrome() {
     <div class="announce">Every bottle is mixed after you order. Free shipping over ${money(FREE_SHIP)}.</div>
     <header class="site-header"><div class="wrap">
       <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
-      <a class="logo" href="index.html">Fieldnote</a>
+      <a class="logo" href="./">Fieldnote</a>
       <nav class="nav" id="nav">
         ${link("scents.html", "House scents", "scents")}
         ${link("discovery.html", "Discovery Set", "discovery")}
