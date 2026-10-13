@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fieldnote</title>
+<meta name="description" content="A Fieldnote house scent, mixed after you order and labeled with your name.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><ellipse cx='16' cy='16' rx='11' ry='14' fill='%23F7F3EA' stroke='%231C1B19'/><text x='16' y='21' text-anchor='middle' font-family='serif' font-size='14'>F</text></svg>">
+</head>
+<body data-page="product">
+<main id="main">
+
+  <div class="wrap">
+    <div class="pdp">
+      <div class="pdp-media" data-pdp-media></div>
+      <div>
+        <div class="crumbs"><a href="scents.html">House scents</a> / <span data-crumb></span></div>
+        <h1 data-name></h1>
+        <p class="mood" data-mood></p>
+        <p class="price-line"><span data-price></span> <span class="small">Eau de parfum</span></p>
+
+        <div class="sizes" role="group" aria-label="Size">
+          <button class="size" data-size="50" aria-pressed="true"><span>50 ml</span><span>$78</span></button>
+          <button class="size" data-size="100" aria-pressed="false"><span>100 ml</span><span>$128</span></button>
+        </div>
+
+        <div class="personalize">
+          <h3>Your label</h3>
+          <p class="small">Your bottle updates as you type.</p>
+          <div class="field">
+            <label for="p-name">Name on the label <span data-n-count>0/20</span></label>
+            <input class="input" id="p-name" maxlength="20" placeholder="e.g. Daniel K." autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="p-city">City <span data-c-count>0/18</span></label>
+            <input class="input" id="p-city" maxlength="18" placeholder="e.g. San Ramon" autocomplete="address-level2">
+          </div>
+        </div>
+
+        <div class="fill-date"><span class="dot"></span><span data-fill></span></div>
+        <button class="btn block" data-add>Add to bag, <span data-price></span></button>
+
+        <dl class="pyramid">
+          <div><dt>Top</dt><dd data-top></dd></div>
+          <div><dt>Heart</dt><dd data-heart></dd></div>
+          <div><dt>Base</dt><dd data-base></dd></div>
+          <div><dt>Wear it</dt><dd data-wear></dd></div>
+          <div><dt>Formula</dt><dd data-code></dd></div>
+        </dl>
+
+        <details open><summary>The story</summary><div><p data-story></p></div></details>
+        <details><summary>How fresh is fresh?</summary><div><p>Your bottle is mixed at the next bench session after you order: weekdays, with a 3pm Pacific cutoff. The date on your label is the day it was made, not the day it left a warehouse.</p></div></details>
+        <details><summary>Shipping and returns</summary><div><p>Free ground shipping on orders over $75. Because every bottle carries your name, we can't restock it, but if a scent isn't right we'll remake it once in another house scent.</p></div></details>
+      </div>
+    </div>
+  </div>
+  <section class="section deep tight">
+    <div class="wrap">
+      <div class="section-head"><h2>You might also like</h2></div>
+      <div class="scent-grid" data-more></div>
+    </div>
+  </section>
+  <div class="sticky-buy"><span data-price></span><button class="btn" data-add>Add to bag</button></div>
+</main>
+<script src="assets/app.js"></script>
+</body>
+</html>
