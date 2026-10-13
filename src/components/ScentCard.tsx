@@ -1,60 +1,53 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import type { Scent } from "@/lib/scents";
-import { shortNotes } from "@/lib/scents";
 import { PRICES, money } from "@/lib/site";
 import { track } from "@/lib/analytics";
-import { Bottle } from "./Bottle";
+import { useSaved } from "@/lib/saved";
+import { Bottle, grayTint } from "./Bottle";
+import { Bookmark } from "./icons";
 
-const SAVED_KEY = "fieldnote:saved";
-const readSaved = (): string[] => {
-  try { return JSON.parse(localStorage.getItem(SAVED_KEY) || "[]"); } catch { return []; }
-};
+/** Formats shown as dots under the price: one dot per bottle size, sized to match. */
+const SIZES = [{ label: "50 ml", px: 8 }, { label: "100 ml", px: 11 }];
+const MAX_DOTS = 5;
 
-/** Light tile with the bottle, a save heart, and a notes reveal on hover or focus. */
+/** Shop-grid tile: tall 3:4 image, then name + bookmark, price, size dots. No card chrome. */
 export function ScentCard({ scent: s, list }: { scent: Scent; list: string }) {
-  const [saved, setSaved] = useState(false);
-  useEffect(() => setSaved(readSaved().includes(s.slug)), [s.slug]);
-  const toggle = () => {
-    const next = !saved;
-    setSaved(next);
-    try {
-      const all = readSaved().filter((x) => x !== s.slug);
-      localStorage.setItem(SAVED_KEY, JSON.stringify(next ? [...all, s.slug] : all));
-    } catch { /* storage unavailable: keep the in-page state */ }
-  };
+  const [saved, toggle] = useSaved(s.slug);
+  /* Dots read darker than the liquid so they hold up at 8–11 px. */
+  const dot = grayTint(s.tint, 0.78);
+  const shown = SIZES.slice(0, MAX_DOTS);
+  const extra = SIZES.length - shown.length;
+  const href = `/scents/${s.slug}/`;
+  const select = () => track("select_item", { item_list_id: list, items: [{ item_id: s.code, item_name: s.name, item_category: "house", price: PRICES.house[50] }] });
 
   return (
-    <div className="group relative">
-      <Link
-        href={`/scents/${s.slug}/`}
-        className="block no-underline"
-        onClick={() => track("select_item", { item_list_id: list, items: [{ item_id: s.code, item_name: s.name, item_category: "house", price: PRICES.house[50] }] })}
-      >
-        <div className="zoom relative mb-4 grid aspect-[4/5] place-items-center bg-surface">
-          <Bottle title={s.name} no={s.no} tint={s.tint} className="w-[46%]" label={s.name} />
-          <dl className="absolute inset-x-3 bottom-3 grid grid-cols-[52px_1fr] gap-x-2 gap-y-1 border border-line bg-canvas/95 p-3 text-[13px] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 max-md:hidden">
-            <dt className="text-muted">Top</dt><dd>{s.notes.top}</dd>
-            <dt className="text-muted">Heart</dt><dd>{s.notes.heart}</dd>
-            <dt className="text-muted">Base</dt><dd>{s.notes.base}</dd>
-          </dl>
-        </div>
-        <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3">
-          <h3 className="text-[22px] md:text-[26px]">{s.name}</h3>
-          <span className="price whitespace-nowrap font-mono text-[13px]">from {money(PRICES.house[50])}</span>
-        </div>
-        <p className="mt-1 text-sm text-muted md:text-[15px]">{shortNotes(s)}</p>
+    <div>
+      <Link href={href} onClick={select} tabIndex={-1} aria-hidden="true" className="relative block aspect-[3/4] overflow-hidden bg-surface">
+        <span className="absolute inset-0 grid place-items-center">
+          <Bottle title={s.name} no={s.no} tint={s.tint} className="w-[54%] transition-transform duration-700 ease-settle hover:scale-[1.03]" label={s.name} />
+        </span>
+        {s.isNew && <span className="absolute bottom-3 left-3 bg-white px-2 py-0.5 text-meta text-ink">New</span>}
       </Link>
-      <button
-        type="button" onClick={toggle} aria-pressed={saved} aria-label={`Save ${s.name}`}
-        className="absolute right-2 top-2 grid size-11 place-items-center rounded-full text-ink transition-colors hover:bg-canvas"
-      >
-        <svg viewBox="0 0 24 24" className="size-[18px]" fill={saved ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
-          <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" />
-        </svg>
-      </button>
+      <div className="mt-3 flex items-start justify-between gap-2">
+        <h3 className="text-title">
+          <Link href={href} onClick={select} className="no-underline hover:underline">{s.name}</Link>
+        </h3>
+        <button
+          type="button" onClick={toggle} aria-pressed={saved} aria-label={`Save ${s.name}`}
+          className="-mr-2.5 -mt-2.5 grid size-11 flex-none place-items-center"
+        >
+          <Bookmark className="size-[18px]" filled={saved} />
+        </button>
+      </div>
+      <p className="price text-title">from {money(PRICES.house[50])}</p>
+      <p className="mt-3 flex items-center gap-2" aria-label={`Available in ${SIZES.map((z) => z.label).join(" and ")}`}>
+        {shown.map((z) => (
+          <span key={z.label} title={z.label} className="rounded-full ring-1 ring-ink/20" style={{ width: z.px, height: z.px, background: dot }} />
+        ))}
+        {extra > 0 && <span className="text-meta">+{extra}</span>}
+      </p>
     </div>
   );
 }

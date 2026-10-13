@@ -8,11 +8,11 @@ import { useCart } from "@/lib/cart";
 const NAV = [
   { href: "/scents/", label: "Scents" },
   { href: "/discovery/", label: "Discovery Set" },
-  { href: "/how-its-made/", label: "How It's Made" },
+  { href: "/how-its-made/", label: "How it's made" },
 ];
 /** Also listed in the mobile menu; on desktop these live in the footer and home page. */
 const MORE = [
-  { href: "/build/", label: "Create Yours" },
+  { href: "/build/", label: "Create yours" },
   { href: "/journal/", label: "Journal" },
 ];
 
@@ -22,17 +22,19 @@ export function Header() {
   const path = usePathname();
   useEffect(() => setMenu(false), [path]);
   const isActive = (href: string) => path?.startsWith(href.replace(/\/$/, ""));
+  /* Product pages carry their own floating back/bag pills on phones, so the header steps aside there. */
+  const bare = /^\/scents\/[^/]+\/?$/.test(path ?? "") ? "max-md:hidden" : "";
 
   return (
     <>
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-2 focus:z-50 focus:bg-canvas focus:px-3 focus:py-2">Skip to content</a>
-      <div className="bg-ink px-4 py-2 text-center font-mono text-[10px] uppercase tracking-[0.1em] text-on-ink sm:text-[11px] sm:tracking-[0.18em]">
+      <div className={`bg-ink px-4 py-2 text-center text-meta text-on-ink ${bare}`}>
         Every bottle mixed and labeled after you order.
       </div>
-      <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur">
+      <header className={`sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur ${bare}`}>
         <div className="wrap relative grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-4">
           <div>
-            <button className="min-h-[44px] pr-3 font-mono text-xs uppercase tracking-[0.16em] lg:hidden" aria-expanded={menu} aria-controls="site-nav" onClick={() => setMenu((m) => !m)}>
+            <button className="min-h-[44px] pr-3 text-[15px] lg:hidden" aria-expanded={menu} aria-controls="site-nav" onClick={() => setMenu((m) => !m)}>
               {menu ? "Close" : "Menu"}
             </button>
             <nav
@@ -43,7 +45,7 @@ export function Header() {
               {[...NAV, ...MORE].map((n, i) => (
                 <Link
                   key={n.href} href={n.href} aria-current={isActive(n.href) ? "page" : undefined}
-                  className={`border-b border-line py-3 text-lg no-underline lg:border-0 lg:py-3 lg:font-mono lg:text-xs lg:uppercase lg:tracking-[0.16em]
+                  className={`border-b border-line py-3 text-lg no-underline lg:border-0 lg:py-3 lg:text-[15px]
                     ${i >= NAV.length ? "lg:hidden" : ""}
                     ${isActive(n.href) ? "text-ink lg:underline lg:decoration-1 lg:underline-offset-[6px]" : "text-muted hover:text-ink"}`}
                 >
@@ -52,9 +54,9 @@ export function Header() {
               ))}
             </nav>
           </div>
-          <Link href="/" className="font-serif text-[24px] uppercase leading-none tracking-[0.08em] no-underline lg:text-[30px]">Fieldnote</Link>
+          <Link href="/" className="text-[19px] font-medium uppercase leading-none tracking-[-0.01em] no-underline lg:text-[22px]">Fieldnote</Link>
           <button
-            className="flex min-h-[44px] items-center gap-2 justify-self-end pl-3 font-mono text-xs uppercase tracking-[0.16em]"
+            className="flex min-h-[44px] items-center gap-2 justify-self-end pl-3 text-[15px]"
             onClick={() => setOpen(true)} aria-label={`Bag, ${lines.length} item${lines.length === 1 ? "" : "s"}`}
           >
             <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">

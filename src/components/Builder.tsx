@@ -203,7 +203,7 @@ export function Builder() {
           <div>
             <h1 className="text-h2">{blendTitle} is in your bag.</h1>
             <p className="lede mt-4">Save this formula code. It's printed on your label too, and it will mix this exact blend again.</p>
-            <p className="mt-4 break-all bg-surface px-4 py-3 font-mono text-sm">{code}</p>
+            <p className="mt-4 break-all bg-surface px-4 py-3 text-sm">{code}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <button className="btn btn-ghost" onClick={() => dispatch({ type: "reset" })}>Build another</button>
               <Link className="btn btn-ghost" href="/scents/">Shop house scents</Link>
@@ -232,7 +232,7 @@ export function Builder() {
 
       <div className={`grid items-start gap-8 ${onQuiz ? "" : "md:grid-cols-[1fr_1.1fr] md:gap-16"}`}>
         {!onQuiz && <div className="mx-auto w-full max-w-[220px] md:sticky md:top-[88px] md:max-w-none">{preview}
-          <p className="mt-3 hidden break-all text-center font-mono text-xs text-muted md:block">{code}</p></div>}
+          <p className="mt-3 hidden break-all text-center text-meta text-muted md:block">{code}</p></div>}
 
         {/* The builder's one moment: each step arrives from the right, so moving forward feels like turning a page.
             Keyed remount, no exit wait, so focus moves to the new heading immediately. */}
@@ -275,7 +275,7 @@ export function Builder() {
                     <button key={id} aria-pressed={on} disabled={full} onClick={() => dispatch({ type: "toggleMod", mod: id })}
                       className="flex min-h-[56px] flex-col items-start justify-center border border-line px-3.5 py-2 text-left transition-colors
                                  aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-on-ink disabled:opacity-40">
-                      <span>{m.name}</span><span className="text-xs opacity-70">{m.feel}</span>
+                      <span>{m.name}</span><span className="text-meta opacity-70">{m.feel}</span>
                     </button>
                   );
                 })}
@@ -292,7 +292,7 @@ export function Builder() {
                 {(Object.keys(INTENSITY) as Intensity[]).map((k) => (
                   <button key={k} role="radio" aria-checked={s.formula.intensity === k} onClick={() => dispatch({ type: "intensity", value: k })}
                     className="min-h-[52px] border border-line px-2 aria-checked:border-ink aria-checked:shadow-[inset_0_0_0_1px_rgb(var(--ink))]">
-                    {INTENSITY[k].label} <span className="block text-xs text-muted">{INTENSITY[k].percent}% concentrate</span>
+                    {INTENSITY[k].label} <span className="block text-meta text-muted">{INTENSITY[k].percent}% concentrate</span>
                   </button>
                 ))}
               </div>
@@ -300,7 +300,7 @@ export function Builder() {
 
               <details className="mb-8 border border-line px-4">
                 <summary className="cursor-pointer py-3 text-[15px]">Bench recipe for a {s.size} ml bottle</summary>
-                <table className="mb-4 w-full font-mono text-[13px] tabular-nums">
+                <table className="mb-4 w-full text-[13px] tabular-nums">
                   <tbody>
                     <tr className="border-b border-line"><td className="py-1.5">{recipe.accord.name} accord</td><td className="text-right">{recipe.accord.sharePct}%</td><td className="text-right">{recipe.accord.grams} g</td></tr>
                     {recipe.modifiers.map((m) => (
@@ -361,7 +361,7 @@ export function Builder() {
                   </div>
                 ))}
                 <div className="grid grid-cols-[96px_1fr] gap-3 border-b border-line py-3">
-                  <dt className="text-[15px] text-muted">Formula</dt><dd className="break-all font-mono text-sm">{code}</dd>
+                  <dt className="text-[15px] text-muted">Formula</dt><dd className="break-all text-sm">{code}</dd>
                 </div>
               </dl>
               <FillDateNote className="my-6" />
@@ -387,7 +387,7 @@ function QuizStep({ qid, selected, onPick, headingRef }: {
             <button key={o.id} role="radio" aria-checked={selected === o.id} onClick={() => onPick(q.id, o.id)}
               className="relative flex aspect-[4/5] flex-col justify-end bg-surface p-5 text-left transition-colors hover:bg-line/40 aria-checked:bg-ink aria-checked:text-on-ink sm:aspect-[5/4]">
               {o.swatch && <span aria-hidden className="absolute left-5 top-5 size-10 rounded-full border border-ink/15" style={{ background: o.swatch, filter: "grayscale(1)" }} />}
-              <span className="font-serif text-[28px] leading-tight md:text-[36px]">{o.label}</span>
+              <span className="text-[22px] leading-tight md:text-[26px]">{o.label}</span>
               {o.hint && <span className="mt-1 text-sm opacity-70">{o.hint}</span>}
             </button>
           ))}

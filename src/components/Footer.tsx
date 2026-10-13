@@ -30,7 +30,7 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <p aria-hidden="true" className="mt-14 font-serif text-[clamp(80px,18vw,240px)] leading-[0.85] tracking-[-0.02em]">Fieldnote</p>
+        <p aria-hidden="true" className="mt-14 text-[clamp(56px,13vw,170px)] font-medium uppercase leading-[0.85] tracking-[-0.04em]">Fieldnote</p>
         <div className="mt-6 flex flex-wrap justify-between gap-4 text-[13px] text-muted">
           <span>Mixed by hand in Los Angeles. Every bottle carries the day it was made.</span>
           <span>© {new Date().getFullYear()} Fieldnote. Preview site; checkout opens at launch.</span>

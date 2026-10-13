@@ -13,9 +13,9 @@ import { PRICES, asset, money } from "@/lib/site";
 
 /** Swap these files in /public/assets to replace the placeholders (same names, any B&W photo). */
 const CARDS = [
-  { title: "Shop House Scents", body: `Six scents, mixed when you order. From ${money(PRICES.house[50])}.`, href: "/scents/", cta: "Shop scents", img: "/assets/card-house-scents.jpg" },
+  { title: "Shop house scents", body: `Six scents, mixed when you order. From ${money(PRICES.house[50])}.`, href: "/scents/", cta: "Shop scents", img: "/assets/card-house-scents.jpg" },
   { title: "Discovery Set", body: `All six in 2 ml vials. The ${money(PRICES.discovery)} comes off your first bottle.`, href: "/discovery/", cta: "Try all six", img: "/assets/card-discovery-set.jpg" },
-  { title: "Make Your Label", body: "Build your own blend and put your name on it.", href: "/build/", cta: "Create yours", img: "/assets/card-make-your-label.jpg" },
+  { title: "Make your label", body: "Build your own blend and put your name on it.", href: "/build/", cta: "Create yours", img: "/assets/card-make-your-label.jpg" },
 ];
 
 /** Hero, category band and the label section share one personalization, so typing a name updates both bottles. */
@@ -31,7 +31,7 @@ export function HomeTop() {
       <section className="relative overflow-hidden">
         <div className="wrap grid min-h-[calc(100svh-100px)] grid-rows-[auto_1fr_auto] gap-6 py-8 md:min-h-[640px] md:py-12 lg:max-h-[860px]">
           <div className="relative z-20">
-            <h1 className="eyebrow max-w-[13ch] font-sans text-[12px] leading-[2.1] tracking-[0.3em] md:text-[13px]">
+            <h1 className="max-w-[12ch] text-[15px] leading-[1.5] md:text-base">
               Cologne that waits for you.
             </h1>
             <span aria-hidden="true" className="mt-2 block h-px w-10 bg-ink" />
@@ -45,8 +45,8 @@ export function HomeTop() {
               initial={still ? false : { clipPath: "inset(0% 22% 0% 22%)" }}
               animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
               transition={{ duration: 1.1, ease: EASE, delay: 0.1 }}
-              className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-center font-serif uppercase leading-[0.8]
-                         tracking-[-0.02em] text-ink text-[clamp(64px,23.6vw,300px)]"
+              className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-center font-bold uppercase leading-[0.8]
+                         tracking-[-0.045em] text-ink text-[clamp(56px,17.6vw,226px)]"
             >
               Fieldnote
             </motion.p>
@@ -71,8 +71,8 @@ export function HomeTop() {
               <Link href="/scents/" className="btn">Shop scents</Link>
               <Link href="/how-its-made/" className="link-line">How it&apos;s made</Link>
             </div>
-            <p className="eyebrow ml-auto text-right text-[11px] leading-[2.1] md:text-xs">
-              Mixed after<br />you order<br />from {money(PRICES.house[50])}
+            <p className="ml-auto text-right text-[15px] leading-[1.5] md:text-base">
+              Mixed after<br />you order,<br />from {money(PRICES.house[50])}
               <span aria-hidden="true" className="ml-auto mt-2 block h-px w-10 bg-ink" />
             </p>
           </div>
@@ -88,9 +88,9 @@ export function HomeTop() {
                 <img src={asset(c.img)} alt="" width={640} height={800} loading="lazy" className="photo h-full w-full object-cover" />
               </span>
               <span className="min-w-0">
-                <span className="block font-mono text-[13px] font-medium uppercase tracking-[0.16em]">{c.title}</span>
+                <span className="block text-title">{c.title}</span>
                 <span className="mt-2 block text-[15px] leading-snug text-on-ink/70">{c.body}</span>
-                <span className="mt-3 inline-flex items-center gap-2 border-b border-current pb-0.5 font-mono text-[11px] uppercase tracking-[0.16em]">
+                <span className="mt-3 inline-flex items-center gap-1.5 text-[15px] underline decoration-1 underline-offset-[5px]">
                   {c.cta} <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
                 </span>
               </span>
@@ -102,7 +102,7 @@ export function HomeTop() {
       <section className="relative overflow-hidden border-b border-line bg-surface">
         <div className="wrap grid items-center gap-10 py-16 md:grid-cols-[1fr_1fr] md:py-24">
           <div className="relative z-10">
-            <h2 className="text-[clamp(44px,6.4vw,88px)] leading-[0.95] tracking-[-0.01em]">Your name. Your city.<br />Your date.</h2>
+            <h2 className="text-[clamp(34px,4.6vw,60px)] leading-[1.08] tracking-[-0.015em]">Your name. Your city.<br />Your date.</h2>
             <p className="lede mt-6">
               Nothing here is mixed until you order it. We fill your bottle by hand within 48 hours and print your name, city and date on the label.
             </p>

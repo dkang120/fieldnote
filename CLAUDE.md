@@ -11,9 +11,10 @@ Before pushing: `npm run typecheck && npm run lint && npm run build`.
 
 ## Brand rules (keep these)
 - Palette: monochrome, no accent. CSS variables on `:root` in `src/app/globals.css`, mapped in tailwind.config.ts: canvas `#E6E5E3` (page), surface `#F2F1EF` (cards, tiles), ink `#111111` (text, solid blocks, buttons), muted `#6B6B6B`, line `#CFCDC9`, on-ink `#F2F1EF` (text on black bands). Photos go grayscale (`img.photo`); the bottle SVG renders scent tints as neutral grays.
-- Type: Instrument Serif (display/voice), Hanken Grotesk (UI/body), IBM Plex Mono only where a label or formula prints.
+- Type: Figtree only (Outfit fallback), 400 for nearly everything, 500 max, sentence case, no wide tracking. Body 16px, product titles 17–18px/1.45, prices 17px, meta 13px. Exceptions: the hero FIELDNOTE wordmark (Figtree 700, tight tracking) and the oval label inside `Bottle.tsx`, which keeps Instrument Serif + IBM Plex Mono so it reads as a printed label.
+- Shop layout follows Aritzia: 3:4 tiles with name + bookmark, price, size dots, no cards; product page is a full-bleed bottle with floating pills, a bottom-sheet panel on phones, settings rows with chevrons, pill tabs (Details / Notes / Reviews, reviews stay an empty state until real ones exist) and a black pill Add to bag bar. Pills for buttons and tabs, square image tiles.
 - Home layout follows a GAZU-style editorial store: giant FIELDNOTE wordmark with the bottle layered over it, black category band, split label section, trust row, house-scents grid. Placeholder images live in `public/assets/` (swap with same filenames).
-- Inspiration: an even mix of Elorea (clean, modern, product-forward) and Diptyque (oval labels, serif, editorial). Le Labo for the made-for-you ritual.
+- Inspiration: Aritzia for type and shop layout, GAZU for the home hero, Diptyque for the oval label. Le Labo for the made-for-you ritual.
 - The signature element is the bottle SVG with the oval label (`src/components/Bottle.tsx`) — live name/city/date. Protect it.
 - Tone: calm, specific, a little dry. Short sentences. No "elevate", "exquisite", luxury clichés.
 - Label wording is "Made for" (decided).

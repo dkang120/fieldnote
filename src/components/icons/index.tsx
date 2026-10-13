@@ -10,3 +10,18 @@ export const Plus = ({ className = "size-5" }: { className?: string }) => (
 export const Check = ({ className = "size-5" }: { className?: string }) => (
   <svg {...base} className={className}><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
 );
+export const Bookmark = ({ className = "size-5", filled = false }: { className?: string; filled?: boolean }) => (
+  <svg {...base} className={className} fill={filled ? "currentColor" : "none"}><path d="M6.5 3.5h11v17l-5.5-4.2-5.5 4.2v-17Z" /></svg>
+);
+export const ArrowLeft = ({ className = "size-5" }: { className?: string }) => (
+  <svg {...base} className={className}><path d="M20 12H5M10 7l-5 5 5 5" /></svg>
+);
+export const Bag = ({ className = "size-5" }: { className?: string }) => (
+  <svg {...base} className={className}><path d="M5 8h14l-1 12H6L5 8Z" /><path d="M9 8V6a3 3 0 0 1 6 0v2" /></svg>
+);
+export const Share = ({ className = "size-5" }: { className?: string }) => (
+  <svg {...base} className={className}><path d="M12 15V3.5M7.5 8 12 3.5 16.5 8" /><path d="M5 12v7.5h14V12" /></svg>
+);
+export const ChevronRight = ({ className = "size-5" }: { className?: string }) => (
+  <svg {...base} className={className}><path d="m9 5.5 6.5 6.5L9 18.5" /></svg>
+);

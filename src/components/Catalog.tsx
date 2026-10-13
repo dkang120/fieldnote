@@ -40,13 +40,13 @@ export function Catalog() {
         </div>
         <label className="flex items-center gap-2 text-[15px] text-muted">
           Sort
-          <select className="input min-h-[44px] w-auto py-0 pr-8" value={sort} onChange={(e) => changeSort(e.target.value as SortKey)}>
+          <select className="input min-h-[44px] w-auto rounded-full px-5 py-0 pr-8" value={sort} onChange={(e) => changeSort(e.target.value as SortKey)}>
             {(Object.keys(SORTS) as SortKey[]).map((k) => <option key={k} value={k}>{SORTS[k].label}</option>)}
           </select>
         </label>
       </div>
       <p className="meta mb-5" aria-live="polite">{shown.length} {shown.length === 1 ? "scent" : "scents"}</p>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:gap-x-7 md:gap-y-10">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-16 md:grid-cols-3">
         {/* The page's one moment: filtering and sorting slide cards to their new places instead of jumping. */}
         <AnimatePresence mode="popLayout" initial={false}>
           {shown.map((s) => (

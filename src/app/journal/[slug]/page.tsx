@@ -32,9 +32,9 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       }} />
       <article className="wrap py-10 md:py-16">
         <nav aria-label="Breadcrumb" className="meta mb-6"><Link href="/journal/" className="no-underline hover:text-ink">Journal</Link></nav>
-        <h1 className="mb-4 max-w-[18ch] text-[clamp(40px,5.5vw,72px)] leading-[1.02]">{p.title}</h1>
+        <h1 className="mb-4 max-w-[18ch] text-[clamp(30px,4vw,48px)] leading-[1.15]">{p.title}</h1>
         <p className="meta mb-12"><time dateTime={p.date}>{new Date(p.date + "T12:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</time> · {p.readMinutes} min read</p>
-        <div className="max-w-[64ch] font-serif text-[21px] leading-[1.6]">
+        <div className="max-w-[64ch] text-[18px] leading-[1.7]">
           {p.body.map((b, i) => (
             <div key={i} className="mb-6">
               {b.h && <h2 className="mb-2 font-sans text-lg font-medium">{b.h}</h2>}

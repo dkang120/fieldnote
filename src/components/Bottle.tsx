@@ -6,9 +6,9 @@ const LABEL = "#F2F1EF";
 const MUTED = "#6B6B6B";
 
 /** Liquid tints stay in the scent data; the illustration renders them as a neutral gray of the same lightness. */
-export function grayTint(hex: string) {
+export function grayTint(hex: string, k = 1) {
   const n = parseInt(hex.replace("#", ""), 16);
-  const y = Math.round(0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255));
+  const y = Math.round((0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) * k);
   const h = y.toString(16).padStart(2, "0");
   return `#${h}${h}${h}`;
 }

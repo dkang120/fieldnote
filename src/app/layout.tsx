@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700&family=Instrument+Serif&family=IBM+Plex+Mono:wght@400&display=swap"
         />
         <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", name: "Fieldnote", url: SITE.url, email: SITE.email }} />
       </head>

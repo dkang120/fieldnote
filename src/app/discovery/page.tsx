@@ -26,8 +26,8 @@ export default function DiscoveryPage() {
         </div>
         <div className="min-w-0">
           <nav aria-label="Breadcrumb" className="meta mb-5"><Link href="/" className="no-underline hover:text-ink">Home</Link> / Discovery Set</nav>
-          <h1 className="mb-2 text-[clamp(44px,5vw,68px)] leading-none">Discovery Set</h1>
-          <p className="mb-5 font-serif text-[22px] text-muted">All six house scents, 2 ml each.</p>
+          <h1 className="mb-2 text-display">Discovery Set</h1>
+          <p className="mb-5 text-[17px] text-muted">All six house scents, 2 ml each.</p>
           <p className="price mb-5 text-xl">{money(PRICES.discovery)} <span className="meta">Credited to your first full bottle</span></p>
           <p className="text-muted">Each vial holds about 30 sprays, enough to wear a scent for a few days and see how it wears on you. When you order a full bottle, we take the {money(PRICES.discovery)} off.</p>
           <AddDiscovery />

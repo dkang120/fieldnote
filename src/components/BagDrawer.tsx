@@ -66,7 +66,7 @@ export function BagDrawer() {
         className={`fixed inset-y-0 right-0 z-[70] flex w-full max-w-[440px] flex-col bg-canvas transition-[transform,visibility] duration-300 ease-settle ${open ? "visible translate-x-0" : "invisible translate-x-full"}`}
       >
         <header className="flex items-center justify-between border-b border-line px-4 py-5 sm:px-8">
-          <h2 className="text-[30px]">Your bag</h2>
+          <h2 className="text-[22px]">Your bag</h2>
           <button ref={closeRef} className="min-h-[44px] pl-3 text-[15px] underline underline-offset-4" onClick={() => setOpen(false)}>Close</button>
         </header>
 
@@ -84,10 +84,10 @@ export function BagDrawer() {
                 <div className="grid h-20 place-items-center bg-surface"><Thumb line={l} date={dates?.compounded ?? null} /></div>
                 <div className="min-w-0">
                   <h3 className="text-xl">{l.kind === "custom" ? `${l.blendName}` : l.title}</h3>
-                  <p className="mt-1 font-mono text-xs text-muted">
+                  <p className="mt-1 text-meta text-muted">
                     {l.kind === "discovery" ? "6 × 2 ml samples" : `${l.size} ml · for ${l.personalization.name}${l.personalization.city ? `, ${l.personalization.city}` : ""}`}
                   </p>
-                  {l.kind === "custom" && <p className="mt-0.5 break-all font-mono text-[11px] text-muted">{l.formulaCode}</p>}
+                  {l.kind === "custom" && <p className="mt-0.5 break-all text-meta text-muted">{l.formulaCode}</p>}
                   {l.kind !== "discovery" && l.personalization.message && (
                     <p className="mt-0.5 text-[13px] italic text-muted">Card: “{l.personalization.message}”</p>
                   )}

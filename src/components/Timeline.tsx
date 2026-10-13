@@ -17,8 +17,8 @@ export function Timeline({ items }: { items: [string, string, string][] }) {
       <ol ref={ref} className="border-t border-ink">
         {items.map(([t, h, p]) => (
           <li key={h} className="grid gap-2 border-b border-line py-7 pl-6 md:grid-cols-[130px_1fr_1.2fr] md:items-baseline md:gap-6 md:pl-8">
-            <span className="font-mono text-sm text-ink">{t}</span>
-            <h2 className="text-[26px] leading-tight">{h}</h2>
+            <span className="text-sm text-ink">{t}</span>
+            <h2 className="text-[20px] leading-snug">{h}</h2>
             <p className="text-muted">{p}</p>
           </li>
         ))}

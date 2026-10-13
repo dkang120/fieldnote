@@ -17,6 +17,8 @@ export interface Scent {
   /** Rough order for "freshest → warmest" sorting */
   warmth: number;
   launchedOrder: number;
+  /** Shows a "New" tag on the tile. Leave unset at launch: all six are launching together. */
+  isNew?: boolean;
 }
 
 export const SCENTS: Scent[] = [

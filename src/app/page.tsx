@@ -38,7 +38,7 @@ export default function Home() {
             <li key={t.title} className="flex items-start gap-3.5">
               <svg viewBox="0 0 24 24" className="size-8 flex-none" aria-hidden="true">{t.icon}</svg>
               <span>
-                <span className="block font-mono text-[11px] font-medium uppercase leading-snug tracking-[0.14em]">{t.title}</span>
+                <span className="block text-[15px] leading-snug">{t.title}</span>
                 <span className="mt-1 block text-[13px] text-muted">{t.body}</span>
               </span>
             </li>
@@ -49,10 +49,10 @@ export default function Home() {
       <section className="section">
         <div className="wrap">
           <div className="mb-10 flex items-end justify-between gap-4">
-            <h2 className="font-sans text-lg font-medium uppercase tracking-[0.14em] md:text-xl">The house scents</h2>
-            <Link href="/scents/" className="link-line text-[12px]">View all</Link>
+            <h2 className="text-h2">The house scents</h2>
+            <Link href="/scents/" className="link-line text-[15px]">View all</Link>
           </div>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 md:gap-y-12">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-16 md:grid-cols-3">
             {SCENTS.map((s) => <ScentCard key={s.slug} scent={s} list="home" />)}
           </div>
         </div>
@@ -62,12 +62,12 @@ export default function Home() {
         <div className="wrap">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
             <h2 className="text-h2">From your order to your desk</h2>
-            <p className="meta font-mono text-[13px]">Next bench session: <NextBench /></p>
+            <p className="meta text-[13px]">Next bench session: <NextBench /></p>
           </div>
           <ol className="grid border-t border-ink md:grid-cols-3">
             {STEPS.map((s, i) => (
               <li key={s.title} className="border-b border-line py-6 md:border-b-0 md:border-r md:px-7 md:first:pl-0 md:last:border-r-0">
-                <span className="mb-4 block font-mono text-xs tracking-[0.2em] text-muted">0{i + 1}</span>
+                <span className="mb-4 block text-meta text-muted">0{i + 1}</span>
                 <h3 className="mb-2.5 text-h3">{s.title}</h3>
                 <p className="text-muted">{s.body}</p>
               </li>
@@ -87,7 +87,7 @@ export default function Home() {
               Start building, from {money(PRICES.custom[50])}
             </Link>
           </div>
-          <dl className="grid grid-cols-[110px_1fr] gap-y-3 border-t border-on-ink/20 pt-5 font-mono text-sm text-on-ink/80">
+          <dl className="grid grid-cols-[110px_1fr] gap-y-3 border-t border-on-ink/20 pt-5 text-sm text-on-ink/80">
             <dt className="text-on-ink/50">Base</dt><dd>Green Fig</dd>
             <dt className="text-on-ink/50">Notes</dt><dd>Bergamot, cedar</dd>
             <dt className="text-on-ink/50">Warmth</dt><dd>A little warmer</dd>
@@ -105,7 +105,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {EXAMPLES.map(([t, n, c, s]) => (
-              <div key={t} className="border border-line bg-surface p-4 font-mono text-xs leading-[1.7]">
+              <div key={t} className="bg-surface p-4 text-meta leading-[1.7]">
                 <b className="font-medium">{t}</b><br />MADE FOR {n}<br />{c}<br />{s}
               </div>
             ))}

@@ -1,7 +1,8 @@
 import type { Config } from "tailwindcss";
 
 /* Fieldnote tokens: monochrome. Values live as CSS variables on :root (globals.css).
-   Serif carries the voice, grotesk does the work, mono appears where a label or metadata prints. */
+   One geometric sans (Figtree) everywhere, 400 for nearly everything, 500 max; 700 only for the hero wordmark.
+   The bottle label SVG keeps its own printed-label faces (see Bottle.tsx). */
 const v = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
 
 export default {
@@ -17,14 +18,14 @@ export default {
         canvas: v("canvas"),
       },
       fontFamily: {
-        serif: ['"Instrument Serif"', '"Times New Roman"', "serif"],
-        sans: ['"Hanken Grotesk"', "system-ui", "sans-serif"],
-        mono: ['"IBM Plex Mono"', "ui-monospace", "monospace"],
+        sans: ["Figtree", "Outfit", "system-ui", "sans-serif"],
       },
       fontSize: {
-        display: ["clamp(44px, 7vw, 92px)", { lineHeight: "0.98", letterSpacing: "-0.01em" }],
-        h2: ["clamp(34px, 4.6vw, 58px)", { lineHeight: "1.04", letterSpacing: "-0.01em" }],
-        h3: ["clamp(24px, 2.4vw, 30px)", { lineHeight: "1.15" }],
+        display: ["clamp(30px, 3.6vw, 44px)", { lineHeight: "1.15", letterSpacing: "-0.01em" }],
+        h2: ["clamp(24px, 2.6vw, 32px)", { lineHeight: "1.2", letterSpacing: "-0.005em" }],
+        h3: ["18px", { lineHeight: "1.45" }],
+        title: ["17px", { lineHeight: "1.45" }],
+        meta: ["13px", { lineHeight: "1.45" }],
       },
       maxWidth: { site: "1240px" },
       transitionTimingFunction: { settle: "cubic-bezier(.2,.7,.2,1)" },
