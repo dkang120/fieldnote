@@ -10,7 +10,7 @@ Next.js 14 App Router + TypeScript + Tailwind 3, `output: "export"` (static). Ba
 Before pushing: `npm run typecheck && npm run lint && npm run build`.
 
 ## Brand rules (keep these)
-- Palette: monochrome, no accent. CSS variables on `:root` in `src/app/globals.css`, mapped in tailwind.config.ts: canvas `#E6E5E3` (page), surface `#F2F1EF` (cards, tiles), ink `#111111` (text, solid blocks, buttons), muted `#6B6B6B`, line `#CFCDC9`, on-ink `#F2F1EF` (text on black bands). Photos go grayscale (`img.photo`); the bottle SVG renders scent tints as neutral grays.
+- Palette: monochrome, no accent. CSS variables on `:root` in `src/app/globals.css`, mapped in tailwind.config.ts: canvas `#E6E5E3` (page), surface `#F2F1EF` (cards, tiles), ink `#111111` (text, solid blocks, buttons), muted `#646464`, line `#CFCDC9`, on-ink `#F2F1EF` (text on black bands). Photos go grayscale (`img.photo`); the bottle SVG renders scent tints as neutral grays.
 - Type: Figtree only (Outfit fallback), 400 for nearly everything, 500 max, sentence case, no wide tracking. Body 16px, product titles 17–18px/1.45, prices 17px, meta 13px. Exceptions: the hero FIELDNOTE wordmark (Figtree 700, tight tracking) and the oval label inside `Bottle.tsx`, which keeps Instrument Serif + IBM Plex Mono so it reads as a printed label.
 - Shop layout follows Aritzia: 3:4 tiles with number + family, name + bookmark, three key notes, a plain mood line, price and an "Explore scent" link (nothing hover-only), no cards; product page is a full-bleed bottle with floating pills, a bottom-sheet panel on phones, settings rows with chevrons, pill tabs (Details / Notes / Reviews, reviews stay an empty state until real ones exist) and a black pill Add to bag bar. Pills for buttons and tabs, square image tiles.
 - Home layout follows a GAZU-style editorial store: giant FIELDNOTE wordmark with the bottle layered over it, black category band, split label section, trust row, house-scents grid. Placeholder images live in `public/assets/` (swap with same filenames).
@@ -44,6 +44,9 @@ House 50 ml $78 / 100 ml $128 · Custom 50 ml $108 / 100 ml $168 · Discovery Se
 ## Not built yet
 - Account / "My Scents" (saved formulas, reorder, order history) — deferred
 - Real checkout (switch with `NEXT_PUBLIC_COMMERCE=shopify` + variant map once the store exists)
+
+## Figma
+Design file: https://www.figma.com/design/zlkIf86qC1F1FZDgGFhPQE (Daniel's team, Pro). Pages: Foundations (tokens and type specimen), Components (bottle, scent tile, buttons, chips, inputs, header/footer, product-page parts, icons), Screens (home, scents, product, Discovery at 1440 and 390). Variables mirror the `:root` tokens with CSS code syntax; keep code and Figma in step when tokens change.
 
 ## Design skills in this repo
 `.claude/skills/impeccable` and `.claude/skills/ui-ux-pro-max` are third-party design skills Daniel asked for. Use them for design passes, but the brand rules above win where they conflict. Impeccable's launcher downloads a helper binary on first run.
