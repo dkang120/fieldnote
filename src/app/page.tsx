@@ -34,8 +34,8 @@ export default function Home() {
 
       <section aria-label="Why Fieldnote" className="border-b border-line">
         <ul className="wrap grid grid-cols-2 gap-x-6 gap-y-8 py-10 md:grid-cols-4 md:py-12">
-          {TRUST.map((t, i) => (
-            <li key={t.title} className="reveal flex items-start gap-3.5" style={{ transitionDelay: `${i * 70}ms` }}>
+          {TRUST.map((t) => (
+            <li key={t.title} className="flex items-start gap-3.5">
               <svg viewBox="0 0 24 24" className="size-8 flex-none" aria-hidden="true">{t.icon}</svg>
               <span>
                 <span className="block font-mono text-[11px] font-medium uppercase leading-snug tracking-[0.14em]">{t.title}</span>
@@ -53,11 +53,7 @@ export default function Home() {
             <Link href="/scents/" className="link-line text-[12px]">View all</Link>
           </div>
           <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-6 md:gap-y-12">
-            {SCENTS.map((s, i) => (
-              <div key={s.slug} className="reveal" style={{ transitionDelay: `${(i % 3) * 80}ms` }}>
-                <ScentCard scent={s} list="home" />
-              </div>
-            ))}
+            {SCENTS.map((s) => <ScentCard key={s.slug} scent={s} list="home" />)}
           </div>
         </div>
       </section>
@@ -70,7 +66,7 @@ export default function Home() {
           </div>
           <ol className="grid border-t border-ink md:grid-cols-3">
             {STEPS.map((s, i) => (
-              <li key={s.title} className="reveal border-b border-line py-6 md:border-b-0 md:border-r md:px-7 md:first:pl-0 md:last:border-r-0" style={{ transitionDelay: `${i * 90}ms` }}>
+              <li key={s.title} className="border-b border-line py-6 md:border-b-0 md:border-r md:px-7 md:first:pl-0 md:last:border-r-0">
                 <span className="mb-4 block font-mono text-xs tracking-[0.2em] text-muted">0{i + 1}</span>
                 <h3 className="mb-2.5 text-h3">{s.title}</h3>
                 <p className="text-muted">{s.body}</p>
@@ -81,9 +77,8 @@ export default function Home() {
       </section>
 
       <section className="section bg-ink text-on-ink">
-        <div className="wrap reveal grid items-center gap-10 md:grid-cols-2 md:gap-20">
+        <div className="wrap grid items-center gap-10 md:grid-cols-2 md:gap-20">
           <div>
-            <p className="eyebrow mb-6 text-on-ink/60">Custom</p>
             <h2 className="text-h2">Or build one that&apos;s only yours.</h2>
             <p className="lede mt-5 text-on-ink/70">
               Answer six quick questions. We match you to a base, you tune it with up to three notes, and name it. Your formula is saved, so you can reorder it exactly.
@@ -109,8 +104,8 @@ export default function Home() {
             <p className="meta">Example labels. Yours carries your own name, city and date.</p>
           </div>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {EXAMPLES.map(([t, n, c, s], i) => (
-              <div key={t} className="reveal border border-line bg-surface p-4 font-mono text-xs leading-[1.7]" style={{ transitionDelay: `${i * 70}ms` }}>
+            {EXAMPLES.map(([t, n, c, s]) => (
+              <div key={t} className="border border-line bg-surface p-4 font-mono text-xs leading-[1.7]">
                 <b className="font-medium">{t}</b><br />MADE FOR {n}<br />{c}<br />{s}
               </div>
             ))}
@@ -119,7 +114,7 @@ export default function Home() {
       </section>
 
       <section className="section border-t border-line">
-        <div className="wrap reveal grid items-center gap-8 md:grid-cols-2 md:gap-20">
+        <div className="wrap grid items-center gap-8 md:grid-cols-2 md:gap-20">
           <div>
             <h2 className="text-h2">Find us on campus</h2>
             <p className="lede mt-5">This fall we&apos;re setting up a blending table at UCLA, USC, NYU, UT Austin and Michigan. Smell everything, then order on the spot.</p>

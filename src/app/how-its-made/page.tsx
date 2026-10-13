@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { FillDateNote } from "@/components/FillDateNote";
 import { JsonLd } from "@/components/JsonLd";
+import { Timeline } from "@/components/Timeline";
+import { Plus } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "How it's made",
@@ -8,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/how-its-made/" },
 };
 
-const LOG = [
+const LOG: [string, string, string][] = [
   ["Your order", "The formula is written down", "Your scent or custom formula, size, name and city go onto a bench card with a formula code, so it can be remade exactly, years from now."],
   ["10:00 / 15:00", "Weighed by hand", "Two bench sessions every weekday. We weigh fragrance concentrate into perfumer's alcohol on a scale accurate to a hundredth of a gram."],
   ["+ 1 hour", "Mixed and filled", "The blend is stirred, filled into heavy glass, and the atomizer is crimped on so it can't leak."],
@@ -39,15 +41,7 @@ export default function MadePage() {
 
       <section className="pb-16 md:pb-24">
         <div className="wrap">
-          <ol className="border-t border-ink">
-            {LOG.map(([t, h, p]) => (
-              <li key={h} className="grid gap-2 border-b border-line py-7 md:grid-cols-[130px_1fr_1.2fr] md:items-baseline md:gap-6">
-                <span className="font-mono text-sm text-ink">{t}</span>
-                <h2 className="text-[26px] leading-tight">{h}</h2>
-                <p className="text-muted">{p}</p>
-              </li>
-            ))}
-          </ol>
+          <Timeline items={LOG} />
         </div>
       </section>
 
@@ -91,7 +85,7 @@ export default function MadePage() {
           <div>
             {FAQ.map(([q, a]) => (
               <details key={q} className="group border-b border-line">
-                <summary className="flex cursor-pointer list-none justify-between gap-4 py-4 [&::-webkit-details-marker]:hidden">{q}<span aria-hidden className="text-[22px] leading-none transition-transform group-open:rotate-45">+</span></summary>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 [&::-webkit-details-marker]:hidden">{q}<Plus className="size-5 flex-none transition-transform duration-200 group-open:rotate-45" /></summary>
                 <p className="pb-4 text-muted">{a}</p>
               </details>
             ))}

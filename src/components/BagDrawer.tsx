@@ -67,7 +67,7 @@ export function BagDrawer() {
       >
         <header className="flex items-center justify-between border-b border-line px-4 py-5 sm:px-8">
           <h2 className="text-[30px]">Your bag</h2>
-          <button ref={closeRef} className="text-[15px] underline underline-offset-4" onClick={() => setOpen(false)}>Close</button>
+          <button ref={closeRef} className="min-h-[44px] pl-3 text-[15px] underline underline-offset-4" onClick={() => setOpen(false)}>Close</button>
         </header>
 
         <div className="flex-1 overflow-auto px-4 sm:px-8">
@@ -81,7 +81,7 @@ export function BagDrawer() {
           ) : (
             lines.map((l) => (
               <div key={l.id} className="grid grid-cols-[64px_1fr_auto] gap-3.5 border-b border-line py-4">
-                <div className="grid h-20 place-items-center rounded-sm bg-surface"><Thumb line={l} date={dates?.compounded ?? null} /></div>
+                <div className="grid h-20 place-items-center bg-surface"><Thumb line={l} date={dates?.compounded ?? null} /></div>
                 <div className="min-w-0">
                   <h3 className="text-xl">{l.kind === "custom" ? `${l.blendName}` : l.title}</h3>
                   <p className="mt-1 font-mono text-xs text-muted">
@@ -102,7 +102,7 @@ export function BagDrawer() {
         {!!lines.length && (
           <footer className="border-t border-line px-4 pb-[calc(18px+env(safe-area-inset-bottom))] pt-4 sm:px-8">
             <p className="meta">{ship.freeShippingRemaining ? `${money(ship.freeShippingRemaining)} away from free shipping` : "Free shipping unlocked"}</p>
-            <div className="mb-4 mt-2 h-[3px] overflow-hidden rounded bg-line">
+            <div className="mb-4 mt-2 h-[3px] overflow-hidden bg-line">
               <span className="block h-full bg-ink transition-[width] duration-500" style={{ width: `${Math.min(100, (subtotal / FREE_SHIP_THRESHOLD) * 100)}%` }} />
             </div>
             <dl className="mb-2 grid grid-cols-[1fr_auto] gap-y-1 tabular-nums">

@@ -5,7 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BagDrawer } from "@/components/BagDrawer";
 import { PageView } from "@/components/PageView";
-import { Reveal } from "@/components/Reveal";
+import { MotionProvider } from "@/components/MotionProvider";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE } from "@/lib/site";
 
@@ -24,9 +24,8 @@ export const viewport: Viewport = { themeColor: "#E6E5E3", width: "device-width"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
@@ -37,14 +36,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", name: "Fieldnote", url: SITE.url, email: SITE.email }} />
       </head>
       <body>
-        <CartProvider>
+        <MotionProvider>
+          <CartProvider>
           <Header />
           <main id="main">{children}</main>
           <Footer />
           <BagDrawer />
           <PageView />
-          <Reveal />
         </CartProvider>
+        </MotionProvider>
       </body>
     </html>
   );

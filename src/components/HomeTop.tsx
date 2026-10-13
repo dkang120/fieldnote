@@ -2,7 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { Bottle } from "./Bottle";
+import { ArrowRight } from "./icons";
+import { EASE } from "./MotionProvider";
 import { LabelFields, emptyPersonalization } from "./LabelFields";
 import { useFillDates } from "@/lib/use-fill-dates";
 import { SCENTS } from "@/lib/scents";
@@ -21,6 +24,7 @@ export function HomeTop() {
   const dates = useFillDates();
   const s = SCENTS[1];
   const date = dates?.compounded ?? null;
+  const still = useReducedMotion();
 
   return (
     <>
@@ -34,19 +38,31 @@ export function HomeTop() {
           </div>
 
           <div className="relative grid min-h-[min(96vw,440px)] place-items-center md:min-h-[400px]">
-            <p
+            {/* The page's one authored moment: the wordmark opens from the center and the bottle is set down onto it.
+                Both start visible, so nothing is hidden before hydration; reduced motion skips the movement. */}
+            <motion.p
               aria-hidden="true"
+              initial={still ? false : { clipPath: "inset(0% 22% 0% 22%)" }}
+              animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+              transition={{ duration: 1.1, ease: EASE, delay: 0.1 }}
               className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-center font-serif uppercase leading-[0.8]
                          tracking-[-0.02em] text-ink text-[clamp(64px,23.6vw,300px)]"
             >
               Fieldnote
-            </p>
-            <div className="absolute left-1/2 top-1/2 z-10 h-[86%] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_24px_30px_rgba(17,17,17,0.22)] md:h-[140%] sm:h-[110%]">
+            </motion.p>
+            <div className="absolute left-1/2 top-1/2 z-10 h-[86%] -translate-x-1/2 -translate-y-1/2 sm:h-[110%] md:h-[140%]">
+              <motion.div
+                className="h-full"
+                initial={still ? false : { y: -22, filter: "drop-shadow(0px 46px 40px rgba(17,17,17,0.10))" }}
+                animate={{ y: 0, filter: "drop-shadow(0px 24px 26px rgba(17,17,17,0.24))" }}
+                transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
+              >
               {/* To use a photo instead: <img src={asset("/assets/hero-bottle.png")} alt="" className="h-full w-auto" /> */}
               <Bottle
                 title={s.name} no={s.no} tint={s.tint} name={p.name} city={p.city} date={date} backdrop="#E6E5E3"
-                className="h-full w-auto motion-safe:animate-[settle_1.1s_cubic-bezier(.2,.7,.2,1)_both]"
+                className="h-full w-auto"
               />
+              </motion.div>
             </div>
           </div>
 
@@ -65,8 +81,8 @@ export function HomeTop() {
 
       <section className="bg-ink text-on-ink">
         <div className="wrap grid gap-8 py-10 md:grid-cols-3 md:gap-6 md:py-12">
-          {CARDS.map((c, i) => (
-            <Link key={c.href} href={c.href} className="reveal group flex items-center gap-5 no-underline" style={{ transitionDelay: `${i * 90}ms` }}>
+          {CARDS.map((c) => (
+            <Link key={c.href} href={c.href} className="group flex min-h-[44px] items-center gap-5 no-underline">
               <span className="zoom block aspect-[4/5] w-[104px] flex-none bg-surface md:w-[112px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={asset(c.img)} alt="" width={640} height={800} loading="lazy" className="photo h-full w-full object-cover" />
@@ -74,8 +90,8 @@ export function HomeTop() {
               <span className="min-w-0">
                 <span className="block font-mono text-[13px] font-medium uppercase tracking-[0.16em]">{c.title}</span>
                 <span className="mt-2 block text-[15px] leading-snug text-on-ink/70">{c.body}</span>
-                <span className="mt-3 inline-block border-b border-current pb-0.5 font-mono text-[11px] uppercase tracking-[0.16em]">
-                  {c.cta} <span aria-hidden="true" className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                <span className="mt-3 inline-flex items-center gap-2 border-b border-current pb-0.5 font-mono text-[11px] uppercase tracking-[0.16em]">
+                  {c.cta} <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1" />
                 </span>
               </span>
             </Link>
@@ -85,8 +101,7 @@ export function HomeTop() {
 
       <section className="relative overflow-hidden border-b border-line bg-surface">
         <div className="wrap grid items-center gap-10 py-16 md:grid-cols-[1fr_1fr] md:py-24">
-          <div className="reveal relative z-10">
-            <p className="eyebrow mb-6 text-muted">Made for you</p>
+          <div className="relative z-10">
             <h2 className="text-[clamp(44px,6.4vw,88px)] leading-[0.95] tracking-[-0.01em]">Your name. Your city.<br />Your date.</h2>
             <p className="lede mt-6">
               Nothing here is mixed until you order it. We fill your bottle by hand within 48 hours and print your name, city and date on the label.

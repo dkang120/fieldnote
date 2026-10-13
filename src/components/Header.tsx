@@ -32,7 +32,7 @@ export function Header() {
       <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur">
         <div className="wrap relative grid h-16 grid-cols-[1fr_auto_1fr] items-center gap-4">
           <div>
-            <button className="py-2 font-mono text-xs uppercase tracking-[0.16em] lg:hidden" aria-expanded={menu} aria-controls="site-nav" onClick={() => setMenu((m) => !m)}>
+            <button className="min-h-[44px] pr-3 font-mono text-xs uppercase tracking-[0.16em] lg:hidden" aria-expanded={menu} aria-controls="site-nav" onClick={() => setMenu((m) => !m)}>
               {menu ? "Close" : "Menu"}
             </button>
             <nav
@@ -43,7 +43,7 @@ export function Header() {
               {[...NAV, ...MORE].map((n, i) => (
                 <Link
                   key={n.href} href={n.href} aria-current={isActive(n.href) ? "page" : undefined}
-                  className={`border-b border-line py-3 text-lg no-underline lg:border-0 lg:py-0 lg:font-mono lg:text-xs lg:uppercase lg:tracking-[0.16em]
+                  className={`border-b border-line py-3 text-lg no-underline lg:border-0 lg:py-3 lg:font-mono lg:text-xs lg:uppercase lg:tracking-[0.16em]
                     ${i >= NAV.length ? "lg:hidden" : ""}
                     ${isActive(n.href) ? "text-ink lg:underline lg:decoration-1 lg:underline-offset-[6px]" : "text-muted hover:text-ink"}`}
                 >
@@ -54,7 +54,7 @@ export function Header() {
           </div>
           <Link href="/" className="font-serif text-[24px] uppercase leading-none tracking-[0.08em] no-underline lg:text-[30px]">Fieldnote</Link>
           <button
-            className="flex items-center gap-2 justify-self-end py-2 font-mono text-xs uppercase tracking-[0.16em]"
+            className="flex min-h-[44px] items-center gap-2 justify-self-end pl-3 font-mono text-xs uppercase tracking-[0.16em]"
             onClick={() => setOpen(true)} aria-label={`Bag, ${lines.length} item${lines.length === 1 ? "" : "s"}`}
           >
             <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">

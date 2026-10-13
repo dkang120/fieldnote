@@ -14,18 +14,18 @@ export function Footer() {
           </div>
           <div>
             <h2 className="mb-3 font-sans text-[15px] font-medium">Shop</h2>
-            <ul className="grid gap-2 text-muted">
-              <li><Link className="no-underline hover:text-ink" href="/scents/">House scents</Link></li>
-              <li><Link className="no-underline hover:text-ink" href="/build/">Create yours</Link></li>
-              <li><Link className="no-underline hover:text-ink" href="/discovery/">Discovery Set</Link></li>
+            <ul className="grid gap-0.5 text-muted">
+              <li><Link className="inline-block py-1.5 no-underline hover:text-ink" href="/scents/">House scents</Link></li>
+              <li><Link className="inline-block py-1.5 no-underline hover:text-ink" href="/build/">Create yours</Link></li>
+              <li><Link className="inline-block py-1.5 no-underline hover:text-ink" href="/discovery/">Discovery Set</Link></li>
             </ul>
           </div>
           <div>
             <h2 className="mb-3 font-sans text-[15px] font-medium">Learn</h2>
-            <ul className="grid gap-2 text-muted">
-              <li><Link className="no-underline hover:text-ink" href="/how-its-made/">How it's made</Link></li>
-              <li><Link className="no-underline hover:text-ink" href="/journal/">Journal</Link></li>
-              <li><Link className="no-underline hover:text-ink" href="/how-its-made/#faq">Shipping and fill times</Link></li>
+            <ul className="grid gap-0.5 text-muted">
+              <li><Link className="inline-block py-1.5 no-underline hover:text-ink" href="/how-its-made/">How it's made</Link></li>
+              <li><Link className="inline-block py-1.5 no-underline hover:text-ink" href="/journal/">Journal</Link></li>
+              <li><Link className="inline-block py-1.5 no-underline hover:text-ink" href="/how-its-made/#faq">Shipping and fill times</Link></li>
               <li className="select-all">{SITE.email}</li>
             </ul>
           </div>

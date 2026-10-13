@@ -7,7 +7,7 @@
   --canvas: 230 229 227;  /* #E6E5E3 page background */
   --surface: 242 241 239; /* #F2F1EF cards, tiles */
   --ink: 17 17 17;        /* #111111 text, solid blocks, buttons */
-  --muted: 107 107 107;   /* #6B6B6B secondary text */
+  --muted: 100 100 100;   /* #646464 secondary text (4.7:1 on canvas, AA) */
   --line: 207 205 201;    /* #CFCDC9 hairlines */
   --on-ink: 242 241 239;  /* #F2F1EF text on inverted bands */
 }
@@ -19,7 +19,15 @@
   :focus-visible { outline: 2px solid rgb(var(--ink)); outline-offset: 3px; }
   .bg-ink :focus-visible { outline-color: rgb(var(--on-ink)); }
   img.photo { filter: grayscale(1); }
-  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+  ::selection { background: rgb(var(--ink)); color: rgb(var(--on-ink)); }
+  html { caret-color: rgb(var(--ink)); accent-color: rgb(var(--ink)); scrollbar-color: rgb(var(--muted) / .5) rgb(var(--canvas)); }
+  a { text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  summary { min-height: 44px; }
+  /* Reduced motion: no spatial movement; quick fades and color changes stay so state changes remain visible. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+    .zoom:hover img, .zoom:hover svg, .group:hover .zoom img, .group:hover .zoom svg { transform: none; }
+  }
 }
 
 @layer components {
@@ -37,6 +45,7 @@
            transition-opacity hover:opacity-60;
   }
   .eyebrow { @apply font-mono text-xs uppercase tracking-[0.28em]; }
+  .price { font-variant-numeric: tabular-nums; }
   .input {
     @apply min-h-[48px] w-full rounded-none border border-line bg-surface px-3.5 text-base text-ink placeholder:text-muted
            focus:border-ink focus:outline-none;
@@ -45,13 +54,9 @@
   .meta { @apply text-sm text-muted; }
   .section { @apply py-16 md:py-28; }
   .chip {
-    @apply min-h-[40px] cursor-pointer rounded-full border border-line bg-transparent px-4 text-[15px]
+    @apply min-h-[44px] cursor-pointer border border-line bg-transparent px-4 text-[15px] transition-colors hover:border-ink
            aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-on-ink;
   }
-  /* Fade-up on scroll; Reveal.tsx adds .is-in. Without JS or with reduced motion, content just shows. */
-  .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
-  .js .reveal.is-in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { .js .reveal { opacity: 1; transform: none; } }
   .zoom { @apply overflow-hidden; }
   .zoom img, .zoom svg { transition: transform .7s cubic-bezier(.2,.7,.2,1); }
   .zoom:hover img, .zoom:hover svg, .group:hover .zoom img, .group:hover .zoom svg { transform: scale(1.04); }

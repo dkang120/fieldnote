@@ -5,6 +5,7 @@ import { SCENTS, getScent } from "@/lib/scents";
 import { ProductBuy } from "@/components/ProductBuy";
 import { ScentCard } from "@/components/ScentCard";
 import { JsonLd } from "@/components/JsonLd";
+import { Plus } from "@/components/icons";
 import { PRICES, SITE } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -63,8 +64,8 @@ export default function ScentPage({ params }: { params: { slug: string } }) {
               ["Shipping and returns", "Free ground shipping on orders over $75. Because every bottle carries your name we can't restock it, but if a scent isn't right we'll remake it once in another house scent.", false],
             ].map(([q, a, open]) => (
               <details key={q as string} open={open as boolean} className="group border-b border-line">
-                <summary className="flex cursor-pointer list-none justify-between py-4 text-[17px] [&::-webkit-details-marker]:hidden">
-                  {q}<span aria-hidden className="text-[22px] leading-none group-open:hidden">+</span><span aria-hidden className="hidden text-[22px] leading-none group-open:inline">–</span>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[17px] [&::-webkit-details-marker]:hidden">
+                  {q}<Plus className="size-5 flex-none transition-transform duration-200 group-open:rotate-45" />
                 </summary>
                 <p className="pb-4 text-muted">{a}</p>
               </details>

@@ -5,7 +5,7 @@ import { useFillDates } from "@/lib/use-fill-dates";
 export function FillDateNote({ className = "" }: { className?: string }) {
   const d = useFillDates();
   return (
-    <div className={`flex items-start gap-3 rounded border border-dashed border-line bg-surface px-4 py-3.5 text-[15px] ${className}`} aria-live="polite">
+    <div className={`flex items-start gap-3 border border-dashed border-line bg-surface px-4 py-3.5 text-[15px] ${className}`} aria-live="polite">
       <span className="mt-2 size-2 flex-none rounded-full bg-ink" />
       <span>
         {d ? (

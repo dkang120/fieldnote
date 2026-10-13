@@ -20,6 +20,9 @@ Before pushing: `npm run typecheck && npm run lint && npm run build`.
 - Don't claim fresh-made fragrance "lasts longer". Say it never sat in a warehouse; the date on the label proves it.
 - Example labels on the home page are marked as examples — never present invented customers or reviews as real.
 
+## Motion
+`motion` (motion/react) with `MotionConfig reducedMotion="user"` in `src/components/MotionProvider.tsx`. One authored moment per page: home hero (wordmark opens, bottle sets down), scents grid re-flows on filter, product size switch re-seats the bottle, Discovery vials stand up in order, How it's made rule draws with scroll, builder steps arrive from the right. Content is visible before hydration; no scattered scroll reveals. Icons are one SVG stroke family in `src/components/icons`.
+
 ## Where things live
 - `src/lib/scents.ts` — six house scents (names are final: Library Musk, Fig Study, Field Vetiver, Late Tea, Salt Hour, Worn Leather)
 - `src/lib/builder.ts` — custom builder: quiz scoring, accords A1–A6, modifiers M01–M12, tested pairings, dose caps, formula codes (`CMP-A4-M04.M10.M11-W+1-I17`), bench recipe
@@ -35,7 +38,6 @@ House 50 ml $78 / 100 ml $128 · Custom 50 ml $108 / 100 ml $168 · Discovery Se
 ## Not built yet
 - Account / "My Scents" (saved formulas, reorder, order history) — deferred
 - Real checkout (switch with `NEXT_PUBLIC_COMMERCE=shopify` + variant map once the store exists)
-- Motion (`motion` package) for interaction polish — planned next, keep it restrained: one orchestrated moment per page, respect reduced motion
 
 ## Design skills in this repo
 `.claude/skills/impeccable` and `.claude/skills/ui-ux-pro-max` are third-party design skills Daniel asked for. Use them for design passes, but the brand rules above win where they conflict. Impeccable's launcher downloads a helper binary on first run.

@@ -41,15 +41,15 @@ export function ScentCard({ scent: s, list }: { scent: Scent; list: string }) {
             <dt className="text-muted">Base</dt><dd>{s.notes.base}</dd>
           </dl>
         </div>
-        <div className="flex items-baseline justify-between gap-3">
+        <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-3">
           <h3 className="text-[22px] md:text-[26px]">{s.name}</h3>
-          <span className="whitespace-nowrap font-mono text-[13px]">from {money(PRICES.house[50])}</span>
+          <span className="price whitespace-nowrap font-mono text-[13px]">from {money(PRICES.house[50])}</span>
         </div>
         <p className="mt-1 text-sm text-muted md:text-[15px]">{shortNotes(s)}</p>
       </Link>
       <button
         type="button" onClick={toggle} aria-pressed={saved} aria-label={`Save ${s.name}`}
-        className="absolute right-2 top-2 grid size-10 place-items-center rounded-full text-ink transition-colors hover:bg-canvas"
+        className="absolute right-2 top-2 grid size-11 place-items-center rounded-full text-ink transition-colors hover:bg-canvas"
       >
         <svg viewBox="0 0 24 24" className="size-[18px]" fill={saved ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
           <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" />
