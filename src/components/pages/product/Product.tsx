@@ -40,7 +40,7 @@ function Desktop({ p }: { p: ProductState }) {
   return (
     <>
       <HeaderDesktop />
-      <main className="bg-white flex gap-[85px] items-start min-h-[1216px] pl-[32px] pt-[70px] pb-[6px] relative w-[1440px]">
+      <main className={`bg-white flex gap-[85px] items-start pl-[32px] pt-[70px] relative w-[1440px] ${fig ? "min-h-[1216px] pb-[6px]" : "pb-[64px]"}`}>
         <div className="relative shrink-0 w-[688px]">
           <MainImage p={p} className="block size-[688px]" />
           {p.c.thumbs ? (
