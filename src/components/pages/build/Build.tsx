@@ -75,7 +75,7 @@ function Bases({ s, dev }: { s: BuildState; dev: Dev }) {
               <span className={`absolute left-0 top-[9px] size-[8px] rounded-full ${on ? "bg-[#2b231f]" : "border border-solid border-[#6b625b] group-hover:border-[#2b231f]"}`} />
             </span>
             <span className={`flex flex-col items-start ${d ? "gap-[6px]" : "gap-[4px]"}`}>
-              <span className={`font-serif ${INK} whitespace-nowrap ${on ? "italic" : "not-italic"} ${d ? "text-[22px] leading-[29px]" : "text-[21px] leading-[27px]"}`}>{a.name}</span>
+              <span className={`font-serif ${INK} whitespace-nowrap ${on ? "italic" : "not-italic"} ${d ? "text-[22px] leading-[29px]" : "text-[21px] leading-[27px] relative top-[1px]"}`}>{a.name}</span>
               <span className={`font-sans leading-[1.5] text-[14px] ${MUTED} ${d ? "w-[250px]" : "w-[320px]"}`}>{a.line}</span>
             </span>
           </button>
@@ -193,7 +193,7 @@ function PreviewDesktop({ s }: { s: BuildState }) {
       <div className="relative h-[700px] w-[560px] overflow-clip" role="img" aria-label={`Label preview: ${s.baseName}, made for ${s.name}, ${s.city}`}>
         <img alt="" src={asset("/img/build/preview-d.webp")} className="absolute inset-0 size-full object-cover pointer-events-none" />
         <div aria-hidden className={`absolute left-[183px] top-[122px] h-[489px] w-[284px] flex flex-col items-center justify-center overflow-clip mix-blend-multiply opacity-90 ${INK} text-center whitespace-nowrap`}>
-          <p className="font-sans leading-[normal] text-[12px] tracking-[4.08px]">FIELDNOTE</p>
+          <p className="font-sans leading-[15px] relative top-[1px] pl-[4.08px] text-[12px] tracking-[4.08px]">FIELDNOTE</p>
           <div className="h-[24px] shrink-0" />
           <p className="font-serif italic leading-[normal] text-[17px] opacity-75">Custom blend</p>
           <div className="h-[6px] shrink-0" />
@@ -201,13 +201,13 @@ function PreviewDesktop({ s }: { s: BuildState }) {
           <div className="h-[16px] shrink-0" />
           <div className="h-px w-[116px] bg-[#2b231f] shrink-0" />
           <div className="h-[18px] shrink-0" />
-          <p className="font-mono leading-[normal] text-[12px] opacity-75">MADE FOR</p>
+          <p className="font-mono leading-[17px] text-[12px] opacity-75">MADE FOR</p>
           <div className="h-[4px] shrink-0" />
-          <p className="font-mono leading-[normal] text-[15px]">{s.name.toUpperCase()}</p>
+          <p className="font-mono leading-[20px] text-[15px]">{s.name.toUpperCase()}</p>
           <div className="h-[10px] shrink-0" />
-          <p className="font-mono leading-[normal] text-[12px] opacity-75">{s.city.toUpperCase()}</p>
+          <p className="font-mono leading-[17px] text-[12px] opacity-75">{s.city.toUpperCase()}</p>
           <div className="h-[2px] shrink-0" />
-          <p className="font-mono leading-[normal] text-[12px] opacity-75">{s.strengthLine}</p>
+          <p className="font-mono leading-[17px] relative -top-[1px] text-[12px] opacity-75">{s.strengthLine}</p>
         </div>
       </div>
       <Caption />
@@ -232,7 +232,7 @@ function BuildDesktop({ s }: { s: BuildState }) {
       <div className="flex items-start gap-[120px] pt-[96px] pb-[140px] px-[80px] w-full">
         <PreviewDesktop s={s} />
         <div className="flex flex-col items-start w-[600px]">
-          <p className={`font-sans leading-[26px] text-[16px] ${MUTED} w-[520px]`}>
+          <p className={`font-sans leading-[26px] text-[16px] ${MUTED} w-[520px] relative top-[1px]`}>
             Answer a few quiet questions. We match you to a base, then you tune it with up to three notes. Name it, keep the formula, and reorder it exactly.
           </p>
           <div className="h-[40px] shrink-0" />
@@ -294,7 +294,7 @@ function BuildPhone({ s }: { s: BuildState }) {
         </div>
       </div>
       <div className="flex flex-col items-start pt-[48px] px-[16px] w-[390px]">
-        <p className={`font-sans leading-[22px] text-[14px] ${MUTED} w-[340px]`}>
+        <p className={`font-sans leading-[22px] text-[14px] ${MUTED} w-[340px] relative top-[1px]`}>
           Answer a few quiet questions. We match you to a base, then you tune it with up to three notes. Name it, keep the formula, and reorder it exactly.
         </p>
         <div className="h-[32px] shrink-0" />
@@ -321,15 +321,15 @@ function BuildPhone({ s }: { s: BuildState }) {
         <div className="relative h-[440px] w-[358px] overflow-clip shrink-0" role="img" aria-label={`Label preview: ${s.baseName}, made for ${s.name}, ${s.city}`}>
           <img alt="" src={asset("/img/build/preview-p.webp")} className="absolute inset-0 size-full object-cover pointer-events-none" />
           <div aria-hidden className={`absolute left-[59px] top-[14px] h-[413px] w-[240px] flex flex-col items-center justify-center overflow-clip mix-blend-multiply opacity-90 ${INK} text-center whitespace-nowrap`}>
-            <p className="font-sans leading-[normal] text-[12px] tracking-[3.6px]">FIELDNOTE</p>
+            <p className="font-sans leading-[15px] relative top-[1px] pl-[3.6px] text-[12px] tracking-[3.6px]">FIELDNOTE</p>
             <div className="h-[18px] shrink-0" />
             <p className="font-serif leading-none text-[30px]">{s.baseName}</p>
             <div className="h-[12px] shrink-0" />
             <div className="h-px w-[96px] bg-[#2b231f] shrink-0" />
             <div className="h-[14px] shrink-0" />
-            <p className="font-mono leading-[normal] text-[14px]">{s.name.toUpperCase()}</p>
+            <p className="font-mono leading-[19px] text-[14px]">{s.name.toUpperCase()}</p>
             <div className="h-[6px] shrink-0" />
-            <p className="font-mono leading-[normal] text-[12px] opacity-75">{s.city.toUpperCase()}</p>
+            <p className="font-mono leading-[17px] relative -top-[1px] text-[12px] opacity-75">{s.city.toUpperCase()}</p>
           </div>
         </div>
         <div className="h-[12px] shrink-0" />

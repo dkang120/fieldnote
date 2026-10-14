@@ -27,7 +27,7 @@ export function HowDesktop() {
                 <li key={s.title} className="border-[#d1cdc4] border-solid border-t flex flex-col gap-[6px] items-start py-[20px] w-full">
                   <p className={T.monoLabel}>{s.label}</p>
                   <h3 className="font-serif font-normal leading-[1.3] text-[20px] text-[#2b231f] whitespace-nowrap">{s.title}</h3>
-                  <p className="font-sans font-normal leading-[1.5] text-[14px] text-[#6b625b] w-full">{s.body}</p>
+                  <p className="font-sans font-normal leading-[1.5] text-[14px] text-[#6b625b] w-[605px] -mr-[5px]">{s.body}</p>
                 </li>
               ))}
             </ol>
