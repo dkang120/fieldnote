@@ -5,7 +5,6 @@ import { JsonLd } from "@/components/JsonLd";
 import { Product } from "@/components/pages/product/Product";
 import { PRICES, SITE } from "@/lib/site";
 
-export const dynamicParams = false;
 export function generateStaticParams() { return SCENTS.map((s) => ({ slug: s.slug })); }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {

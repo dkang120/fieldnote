@@ -177,7 +177,7 @@ export const STEPS = [
 export const REDEEM = "How To Redeem Your Credit and Find Your Signature Scent";
 export const TABS = ["Description", "Notes", "Ingredients"] as const;
 export type Tab = (typeof TABS)[number];
-export const INGREDIENTS_NOTE = "The full ingredient list for each scent will be posted here before launch.";
+export const INGREDIENTS_NOTE = "A full ingredient list is printed on each box.";
 
 export interface Slide { name: string; no: string; sub: string; line: string; notes: [string, string, string]; d: string; p: string }
 export const FAMILIES: { name: string; words: string; slides: [Slide, Slide] }[] = [
