@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { SCENTS } from "@/lib/scents";
-import { POSTS } from "@/content/posts";
 import { SITE } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -14,7 +13,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: u("/build/"), changeFrequency: "monthly", priority: 0.8 },
     { url: u("/discovery/"), changeFrequency: "monthly", priority: 0.8 },
     { url: u("/how-its-made/"), changeFrequency: "monthly", priority: 0.6 },
-    { url: u("/journal/"), changeFrequency: "weekly", priority: 0.6 },
-    ...POSTS.map((p) => ({ url: u(`/journal/${p.slug}/`), lastModified: p.date, changeFrequency: "yearly" as const, priority: 0.5 })),
+    { url: u("/about/"), changeFrequency: "monthly", priority: 0.5 },
   ];
 }
