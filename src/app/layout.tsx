@@ -27,7 +27,7 @@ const SCALE = `(function(){var d=document.documentElement;function s(){var w=d.c
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: SCALE }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

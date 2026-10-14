@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SCENTS, getScent, shortNotes } from "@/lib/scents";
-import { ProductBuy } from "@/components/ProductBuy";
-import { ScentCard } from "@/components/ScentCard";
 import { JsonLd } from "@/components/JsonLd";
+import { Product } from "@/components/pages/product/Product";
 import { PRICES, SITE } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -19,8 +18,6 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 export default function ScentPage({ params }: { params: { slug: string } }) {
   const s = getScent(params.slug);
   if (!s) notFound();
-  const more = SCENTS.filter((x) => x.slug !== s.slug).slice(0, 3);
-
   return (
     <>
       <JsonLd
@@ -47,15 +44,7 @@ export default function ScentPage({ params }: { params: { slug: string } }) {
           ],
         }}
       />
-      <ProductBuy scent={s} />
-      <section className="pb-32 pt-16 md:pb-24 md:pt-20">
-        <div className="wrap">
-          <h2 className="mb-8 text-h2">You might also like</h2>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-16 md:grid-cols-3 [&>*:nth-child(3)]:max-md:hidden">
-            {more.map((x) => <ScentCard key={x.slug} scent={x} list="related" />)}
-          </div>
-        </div>
-      </section>
+      <Product slug={s.slug} />
     </>
   );
 }

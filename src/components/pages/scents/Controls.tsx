@@ -239,7 +239,7 @@ export function SortMenu({ sort, choose, close }: { sort: Sort; choose: (s: Sort
           role="menuitemradio"
           aria-checked={s === sort}
           onClick={() => { choose(s); close(); }}
-          className={`flex h-[31px] items-center px-[20px] shrink-0 w-full text-left hover:opacity-60 transition-opacity ${T12} ${s === sort ? "underline [text-underline-position:from-font]" : ""}`}
+          className={`flex h-[31px] items-center px-[20px] shrink-0 w-full text-left hover:opacity-60 transition-opacity ${T12}`}
         >
           {s}
         </button>

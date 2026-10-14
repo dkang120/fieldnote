@@ -34,7 +34,8 @@ function thumbFor(l: CartLine) {
 function detailFor(l: CartLine) {
   if (l.kind === "discovery") return ["Six 2 ml vials"];
   const p = l.personalization;
-  return [`${l.size} ml · Eau de parfum`, p.name ? `Made for ${p.name}${p.city ? ` · ${p.city}` : ""}` : "Label details to come"];
+  const strength = l.kind === "custom" && l.formula.intensity === "soft" ? "Eau de cologne" : "Eau de parfum";
+  return [`${l.size} ml · ${strength}`, p.name ? `Made for ${p.name}${p.city ? ` · ${p.city}` : ""}` : "Label details to come"];
 }
 
 function CartPanel({ px }: { px: number }) {

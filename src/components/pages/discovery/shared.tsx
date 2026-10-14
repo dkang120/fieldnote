@@ -93,7 +93,7 @@ export function VialsSwatch() {
       {[3, 12.4, 21.8, 31.2, 40.6, 50].map((l) => (
         <div key={l} className="absolute h-[45px] top-[7.5px] w-[12px]" style={{ left: l }}>
           <div className="absolute bg-[#2b231f] h-[6px] left-[3.9px] rounded-[2px] top-[0.6px] w-[4.2px]" />
-          <div className="absolute bg-[#d1cdc4] border-[0.3px] border-[#2b231f] border-solid h-[37.2px] left-[2.7px] rounded-[10px] top-[6.6px] w-[6.6px]" />
+          <div className="absolute bg-[#d1cdc4] shadow-[inset_0_0_0_0.3px_#2b231f] h-[37.2px] left-[2.7px] rounded-[10px] top-[6.6px] w-[6.6px]" />
           <div className="absolute bg-[#f7f4f0] h-[10.8px] left-[3.3px] top-[21px] w-[5.4px]" />
           <p className="-translate-x-1/2 absolute font-sans font-normal leading-[1.4] left-[6px] text-[1.08px] text-[#2b231f] text-center top-[24.3px] w-[5.4px]">02</p>
         </div>

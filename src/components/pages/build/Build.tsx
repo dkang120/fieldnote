@@ -14,6 +14,8 @@ import {
 type Dev = "d" | "p";
 const INK = "text-[#2b231f]";
 const MUTED = "text-[#6b625b]";
+/** Figma sets the button label 1px lower than the browser does. */
+const BTN_TEXT = "text-[16px] leading-[1.5] relative top-[1px]";
 const EYEBROW = "font-sans font-medium leading-[16px] text-[12px] tracking-[0.72px] uppercase whitespace-nowrap";
 
 const stepId = (dev: Dev, i: number) => `build-${dev}-step-${i + 1}`;
@@ -35,7 +37,8 @@ function StepIndex({ s, dev }: { s: BuildState; dev: Dev }) {
             type="button"
             onClick={() => { s.reach(i); scrollToStep(dev, i); }}
             aria-current={on ? "step" : undefined}
-            className={`relative shrink-0 uppercase ${on ? `${INK} underline decoration-[1px] decoration-solid underline-offset-[2px]` : `${MUTED} link-hover`}`}
+            style={{ width: (dev === "d" ? [44, 58, 88, 59] : [40, 55, 84, 55])[i] }}
+            className={`relative shrink-0 uppercase text-left ${on ? INK : `${MUTED} link-hover`}`}
           >
             {`${ROMAN[i]}${dev === "d" ? "  " : " "}${label}`}
           </button>
@@ -125,7 +128,7 @@ function Strengths({ s, dev }: { s: BuildState; dev: Dev }) {
   const d = dev === "d";
   return (
     <div role="radiogroup" aria-label="Strength" className={`flex items-baseline whitespace-nowrap ${d ? "gap-[40px] text-[24px] leading-[30px]" : "gap-[28px] text-[22px] leading-[28px]"}`}>
-      {(Object.keys(STRENGTH) as Strength[]).map((k) => {
+      {(Object.keys(STRENGTH) as Strength[]).map((k, i) => {
         const on = s.strength === k;
         return (
           <button
@@ -134,7 +137,8 @@ function Strengths({ s, dev }: { s: BuildState; dev: Dev }) {
             role="radio"
             aria-checked={on}
             onClick={() => s.setStrength(k)}
-            className={`font-serif shrink-0 ${on ? `italic ${INK} underline decoration-[1px] decoration-solid` : `not-italic ${MUTED} link-hover`}`}
+            style={{ width: (d ? [122, 130] : [112, 119])[i] }}
+            className={`font-serif shrink-0 text-left ${on ? `italic ${INK} underline decoration-[1px] decoration-solid underline-offset-[6px]` : `not-italic ${MUTED} link-hover`}`}
           >
             {STRENGTH[k].label}
           </button>
@@ -268,7 +272,7 @@ function BuildDesktop({ s }: { s: BuildState }) {
             <Formula s={s} />
             <div className="h-[40px] shrink-0" />
             <div className="flex gap-[32px] items-center">
-              <Button onClick={s.reserve}>Reserve, pay at launch</Button>
+              <Button onClick={s.reserve} textClass={BTN_TEXT}>Reserve, pay at launch</Button>
               <p className={`font-sans leading-[1.5] text-[16px] ${INK} whitespace-nowrap`}>{PRICE_TEXT}</p>
             </div>
           </section>
@@ -345,9 +349,9 @@ function BuildPhone({ s }: { s: BuildState }) {
         <div className="h-[12px] shrink-0" />
         <Formula s={s} />
         <div className="h-[32px] shrink-0" />
-        <p className={`font-sans leading-[1.5] text-[16px] ${INK} whitespace-nowrap`}>{PRICE_TEXT}</p>
+        <p className={`font-sans leading-[1.5] text-[16px] ${INK} whitespace-nowrap relative top-[1px]`}>{PRICE_TEXT}</p>
         <div className="h-[14px] shrink-0" />
-        <Button onClick={s.reserve} className="h-[50px] px-[32px] w-full">Reserve, pay at launch</Button>
+        <Button onClick={s.reserve} textClass={BTN_TEXT} className="h-[50px] px-[32px] w-full">Reserve, pay at launch</Button>
       </div>
     </div>
   );
