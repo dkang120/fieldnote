@@ -35,19 +35,19 @@ export function Newsletter({ device }: { device: Device }) {
     <section className="bg-[#2b231f] overflow-clip relative" style={{ width: g.w, height: g.h }}>
       <img alt="" loading="lazy" decoding="async" src={asset(g.img)} className="absolute left-0 top-0 max-w-none object-cover" style={{ width: g.w, height: g.h }} />
       <div className="absolute left-0 top-0" style={{ width: g.w, height: g.h, backgroundImage: g.scrim }} />
-      <p className={`absolute leading-[1.3] text-[12px] tracking-[1.6px] uppercase whitespace-nowrap ${mono}`} style={{ left: g.x, top: g.eyebrowY }}>
+      <p className={`absolute leading-[16px] text-[12px] tracking-[1.6px] uppercase whitespace-nowrap ${mono}`} style={{ left: g.x, top: g.eyebrowY }}>
         Letters from the bench
       </p>
       <div className={`[word-break:break-word] absolute text-[14px] ${mono}`} style={{ left: g.x, top: g.bodyY, width: g.bodyW }}>
         {device === "d" ? (
           <>
-            <p className="leading-[1.4] mb-0">Join the list for new scents, campus pop-up dates</p>
-            <p className="leading-[1.4] mb-0">and notes from the bench.</p>
+            <p className="leading-[20px] mb-0">Join the list for new scents, campus pop-up dates</p>
+            <p className="leading-[20px] mb-0">and notes from the bench.</p>
           </>
         ) : (
-          <p className="leading-[1.4] mb-0">Join the list for new scents, campus pop-up dates and notes from the bench.</p>
+          <p className="leading-[20px] mb-0">Join the list for new scents, campus pop-up dates and notes from the bench.</p>
         )}
-        <p className="leading-[1.4]">Your first bottle is 10% off.</p>
+        <p className="leading-[20px]">Your first bottle is 10% off.</p>
       </div>
       <form onSubmit={submit} noValidate>
         <div className="absolute h-[30px]" style={{ left: g.x, top: g.fieldY, width: g.fieldW }}>
