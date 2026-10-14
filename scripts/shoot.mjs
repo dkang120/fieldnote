@@ -19,9 +19,16 @@ for (const w of widths) {
   const page = await browser.newPage({ viewport: { width: w, height: 900 }, deviceScaleFactor: 1 });
   await page.goto(base + route, { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);
-  // load lazy images
-  await page.evaluate(async () => { for (const i of document.images) { i.loading = "eager"; } await new Promise((r) => setTimeout(r, 300)); });
+  // load lazy images: scroll through the page, then wait for every image to decode
+  await page.evaluate(async () => {
+    for (const i of document.images) i.loading = "eager";
+    const step = innerHeight * 0.8;
+    for (let y = 0; y < document.body.scrollHeight; y += step) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); }
+    scrollTo(0, 0);
+    await Promise.all([...document.images].map((i) => (i.complete ? null : new Promise((r) => { i.onload = i.onerror = r; }))));
+  });
   await page.waitForLoadState("networkidle");
+  await page.waitForTimeout(300);
   const file = `${out}/${name}-${w}.png`;
   await page.screenshot({ path: file, fullPage: true });
   console.log(file);
