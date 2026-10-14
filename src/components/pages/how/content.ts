@@ -43,6 +43,6 @@ export const EMAIL = "hello@fieldnote.studio";
 
 /* Shared text styles from the Figma text styles. */
 export const T = {
-  monoLabel: "font-mono font-normal leading-[1.3] text-[12px] text-[#6b625b] tracking-[1.6px] uppercase whitespace-nowrap",
-  eyebrow: "font-sans font-medium leading-[1.3] text-[12px] text-[#6b625b] tracking-[0.72px] uppercase whitespace-nowrap",
+  monoLabel: "font-mono font-normal leading-[16px] text-[12px] text-[#6b625b] tracking-[1.6px] uppercase whitespace-nowrap",
+  eyebrow: "font-sans font-medium leading-[16px] text-[12px] text-[#6b625b] tracking-[0.72px] uppercase whitespace-nowrap",
 };

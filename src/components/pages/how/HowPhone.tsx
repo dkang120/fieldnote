@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- static export: images are pre-sized exports in public/img/how */
 /* How it's made, phone 390 (Figma 170:1837). Header and footer come from site/Chrome. */
 import { Fragment } from "react";
 import { asset } from "@/lib/site";
@@ -9,7 +10,7 @@ export function HowPhone() {
       {/* Intro 170:1852 */}
       <section className="[word-break:break-word] bg-[#ece8e1] flex flex-col gap-[24px] items-start px-[16px] py-[56px] w-full">
         <p className={T.monoLabel}>{INTRO.eyebrow}</p>
-        <h1 className="font-serif font-normal leading-[1.05] text-[36px] text-[#2b231f] tracking-[-0.36px] w-[358px]">{INTRO.title}</h1>
+        <h1 className="font-serif font-normal leading-[38px] text-[36px] text-[#2b231f] tracking-[-0.36px] w-[358px]">{INTRO.title}</h1>
         <p className="font-sans font-normal leading-[1.5] text-[18px] text-[#6b625b] w-[358px]">{INTRO.lede}</p>
         <p className="font-sans font-normal leading-[1.5] text-[14px] text-[#2b231f] w-[358px]">{INTRO.note}</p>
       </section>
@@ -45,11 +46,11 @@ export function HowPhone() {
         <p className={`[word-break:break-word] ${T.eyebrow}`}>What&apos;s printed</p>
         <div className="h-[16px] shrink-0" />
         <h2 className="font-serif font-normal text-[36px] text-[#2b231f] tracking-[-0.36px] whitespace-nowrap">
-          <span className="block leading-[1.04]">Five lines,</span>
-          <span className="block italic leading-[1.04]">written for one person.</span>
+          <span className="block leading-[37px]">Five lines,</span>
+          <span className="block italic leading-[37px]">written for one person.</span>
         </h2>
         <div className="h-[16px] shrink-0" />
-        <p className="font-sans font-normal leading-[1.6] text-[14px] text-[#6b625b] w-[340px]">
+        <p className="font-sans font-normal leading-[22px] text-[14px] text-[#6b625b] w-[340px]">
           Your label prints with your name, your city and the day it was made.
         </p>
         <div className="h-[32px] shrink-0" />
@@ -81,15 +82,15 @@ export function HowPhone() {
         <p className={`[word-break:break-word] ${T.eyebrow}`}>Shipping and fill times</p>
         <div className="h-[16px] shrink-0" />
         <h2 className="font-serif font-normal text-[32px] text-[#2b231f] tracking-[-0.32px] whitespace-nowrap">
-          <span className="block leading-[1.04]">Mixed the day you order,</span>
-          <span className="block italic leading-[1.04]">on its way the next.</span>
+          <span className="block leading-[33px]">Mixed the day you order,</span>
+          <span className="block italic leading-[33px]">on its way the next.</span>
         </h2>
         <div className="h-[40px] shrink-0" />
         <ul className="flex flex-col items-start">
           {FACTS.map((f) => (
             <li key={f.title} className="[word-break:break-word] flex flex-col gap-[8px] items-start pb-[28px]">
-              <h3 className="font-serif font-normal italic leading-[1.2] text-[28px] text-[#2b231f] whitespace-nowrap">{f.title}</h3>
-              <p className="font-sans font-normal leading-[1.55] text-[14px] text-[#6b625b] w-[320px]">{f.body}</p>
+              <h3 className="font-serif font-normal italic leading-[34px] text-[28px] text-[#2b231f] whitespace-nowrap">{f.title}</h3>
+              <p className="font-sans font-normal leading-[22px] text-[14px] text-[#6b625b] w-[320px]">{f.body}</p>
             </li>
           ))}
         </ul>
@@ -100,17 +101,17 @@ export function HowPhone() {
         <p className={`[word-break:break-word] ${T.eyebrow}`}>Questions</p>
         <div className="h-[16px] shrink-0" />
         <h2 className="font-serif font-normal text-[36px] text-[#2b231f] tracking-[-0.36px] whitespace-nowrap">
-          <span className="block leading-[1.04]">A few things</span>
-          <span className="block italic leading-[1.04]">people ask.</span>
+          <span className="block leading-[37px]">A few things</span>
+          <span className="block italic leading-[37px]">people ask.</span>
         </h2>
         <div className="h-[40px] shrink-0" />
         {FAQ.map(([q, a]) => (
           <Fragment key={q}>
             <details open className="[word-break:break-word] w-[358px]">
-              <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden font-serif font-normal leading-[1.18] text-[22px] text-[#2b231f] w-[358px]">
+              <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden font-serif font-normal leading-[26px] text-[22px] text-[#2b231f] w-[358px]">
                 <h3 className="font-normal">{q}</h3>
               </summary>
-              <p className="font-sans font-normal leading-[1.6] mt-[10px] text-[14px] text-[#6b625b] w-[358px]">{a}</p>
+              <p className="font-sans font-normal leading-[22px] mt-[10px] text-[14px] text-[#6b625b] w-[358px]">{a}</p>
             </details>
             <div className="h-[36px] shrink-0" />
           </Fragment>

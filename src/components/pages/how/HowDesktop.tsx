@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- static export: images are pre-sized exports in public/img/how */
 /* How it's made, desktop 1440 (Figma 170:1681). Header and footer come from site/Chrome. */
 import { asset } from "@/lib/site";
 import { EMAIL, FACTS, FAQ, INTRO, LINES, STEPS, T } from "./content";
@@ -20,7 +21,7 @@ export function HowDesktop() {
             <img alt="Hands setting a black cap on a freshly filled bottle on a wooden bench" className="absolute inset-0 object-cover size-full" src={asset("/img/how/bench-d.webp")} />
           </div>
           <div className="[word-break:break-word] flex flex-[1_0_0] flex-col items-start min-w-px">
-            <h2 className="font-serif font-normal leading-[1.2] text-[32px] text-[#2b231f] w-full">How a bottle is filled to order</h2>
+            <h2 className="font-serif font-normal leading-[38px] text-[32px] text-[#2b231f] w-full">How a bottle is filled to order</h2>
             <ol className="w-full">
               {STEPS.map((s) => (
                 <li key={s.title} className="border-[#d1cdc4] border-solid border-t flex flex-col gap-[6px] items-start py-[20px] w-full">
@@ -45,11 +46,11 @@ export function HowDesktop() {
           <p className={`[word-break:break-word] ${T.eyebrow}`}>What&apos;s printed</p>
           <div className="h-[24px] shrink-0" />
           <h2 className="font-serif font-normal text-[48px] text-[#2b231f] whitespace-nowrap">
-            <span className="block leading-[1.04]">Five lines,</span>
-            <span className="block italic leading-[1.04]">written for one person.</span>
+            <span className="block leading-[50px]">Five lines,</span>
+            <span className="block italic leading-[50px]">written for one person.</span>
           </h2>
           <div className="h-[24px] shrink-0" />
-          <p className="font-sans font-normal leading-[1.65] text-[16px] text-[#6b625b] w-[440px]">
+          <p className="font-sans font-normal leading-[26px] text-[16px] text-[#6b625b] w-[440px]">
             Your label prints with your name, your city and the day it was made.
           </p>
           <div className="h-[48px] shrink-0" />
@@ -60,7 +61,7 @@ export function HowDesktop() {
                   <span className={T.eyebrow}>{l.no}</span>
                 </div>
                 <div className="flex flex-col gap-[4px] items-start whitespace-nowrap">
-                  <h3 className="font-serif font-normal leading-[1.3] text-[22px] text-[#2b231f]">{l.title}</h3>
+                  <h3 className="font-serif font-normal leading-[29px] text-[22px] text-[#2b231f]">{l.title}</h3>
                   <p className="font-sans font-normal leading-[1.5] text-[14px] text-[#6b625b]">{l.body}</p>
                 </div>
               </li>
@@ -82,15 +83,15 @@ export function HowDesktop() {
           <p className={`[word-break:break-word] text-center ${T.eyebrow}`}>Shipping and fill times</p>
           <div className="h-[24px] shrink-0" />
           <h2 className="font-serif font-normal text-[48px] text-[#2b231f] text-center whitespace-nowrap">
-            <span className="block leading-[1.04]">Mixed the day you order,</span>
-            <span className="block italic leading-[1.04]">on its way the next.</span>
+            <span className="block leading-[50px]">Mixed the day you order,</span>
+            <span className="block italic leading-[50px]">on its way the next.</span>
           </h2>
         </div>
         <ul className="[word-break:break-word] absolute flex gap-[48px] items-start left-[80px] top-[356px]">
           {FACTS.map((f) => (
             <li key={f.title} className="flex flex-col gap-[12px] items-start shrink-0 w-[284px]">
-              <h3 className="font-serif font-normal italic leading-[1.2] text-[34px] text-[#2b231f] whitespace-nowrap">{f.title}</h3>
-              <p className="font-sans font-normal leading-[1.55] text-[14px] text-[#6b625b] w-[250px]">{f.body}</p>
+              <h3 className="font-serif font-normal italic leading-[41px] text-[34px] text-[#2b231f] whitespace-nowrap">{f.title}</h3>
+              <p className="font-sans font-normal leading-[22px] text-[14px] text-[#6b625b] w-[250px]">{f.body}</p>
             </li>
           ))}
         </ul>
@@ -102,8 +103,8 @@ export function HowDesktop() {
           <p className={`[word-break:break-word] ${T.eyebrow}`}>Questions</p>
           <div className="h-[24px] shrink-0" />
           <h2 className="font-serif font-normal text-[48px] text-[#2b231f] whitespace-nowrap">
-            <span className="block leading-[1.04]">A few things</span>
-            <span className="block italic leading-[1.04]">people ask.</span>
+            <span className="block leading-[50px]">A few things</span>
+            <span className="block italic leading-[50px]">people ask.</span>
           </h2>
           <div className="h-[28px] shrink-0" />
           <p className="font-sans font-normal leading-[1.5] text-[14px] text-[#6b625b] whitespace-nowrap">
@@ -114,10 +115,10 @@ export function HowDesktop() {
         <div className="[word-break:break-word] flex flex-col gap-[48px] items-start min-h-[688px] w-[640px]">
           {FAQ.map(([q, a]) => (
             <details key={q} open className="w-[640px]">
-              <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden font-serif font-normal leading-[1.15] text-[26px] text-[#2b231f] w-[600px]">
+              <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden font-serif font-normal leading-[30px] text-[26px] text-[#2b231f] w-[600px]">
                 <h3 className="font-normal">{q}</h3>
               </summary>
-              <p className="font-sans font-normal leading-[1.65] mt-[12px] text-[16px] text-[#6b625b] w-[560px]">{a}</p>
+              <p className="font-sans font-normal leading-[26px] mt-[12px] text-[16px] text-[#6b625b] w-[560px]">{a}</p>
             </details>
           ))}
         </div>
