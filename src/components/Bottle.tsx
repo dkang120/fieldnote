@@ -1,9 +1,10 @@
 import { fmtLabelDate } from "@/lib/fill-dates";
 
-/* Mirrors the :root tokens in globals.css (SVG fill attributes can't read CSS variables). */
-const INK = "#111111";
-const LABEL = "#F2F1EF";
-const MUTED = "#6B6B6B";
+/* Figma Bottle component (6:4). SVG fills can't read CSS variables, so the tokens are mirrored here. */
+const INK = "#2B231F";
+const LABEL = "#F7F4F0";
+const MUTED = "#6B625B";
+const CANVAS = "#ECE8E1";
 
 /** Liquid tints stay in the scent data; the illustration renders them as a neutral gray of the same lightness. */
 export function grayTint(hex: string, k = 1) {
@@ -37,28 +38,32 @@ export function Bottle({ title, no, tint, name = "", city = "", date = null, siz
   const cy = top + 48 + (h - 50) / 2 + 6;
   const liquid = grayTint(tint);
   const dateText = date ? `${fmtLabelDate(date)} · ${size}ML` : `MIXED ON ORDER · ${size}ML`;
+  // Label text baselines, relative to the label centre. Figma places each line by its top with a 1.3 line height;
+  // these are those tops converted with the fonts' ascent/descent (Figtree .95/.25, Instrument Serif .99/.31, Plex Mono 1.03/.28).
+  const longTitle = title.length > 12;
+  const longName = who.length > 14;
   return (
     <svg viewBox="0 0 200 360" role="img" aria-label={label ?? `${title}, made for ${who} in ${where}`} className={`block h-auto ${className}`}>
-      {backdrop && <rect x="24" y={top + 48} width="152" height={h - 50} rx="12" fill={backdrop} />}
+      <rect x="24" y={top + 48} width="152" height={h - 50} rx="12" fill={backdrop ?? CANVAS} />
+      <rect x="24.5" y={top + 48.5} width="151" height={h - 51} rx="11.5" fill={liquid} stroke={INK} />
+      <rect x="24" y={top + 74} width="152" height={h - 76} rx="12" fill={liquid} />
+      <rect x="34" y={top + 60} width="5" height={h - 90} rx="2.5" fill="#fff" />
+      <rect x="86" y={top + 38} width="28" height="12" fill={MUTED} />
       <rect x="78" y={top - 8} width="44" height="48" rx="3" fill={INK} />
-      <rect x="86" y={top + 38} width="28" height="12" fill="#8A8A8A" />
-      <rect x="24" y={top + 48} width="152" height={h - 50} rx="12" fill={liquid} fillOpacity=".55" stroke={INK} strokeOpacity=".28" />
-      <rect x="24" y={top + 74} width="152" height={h - 76} rx="12" fill={liquid} fillOpacity=".55" />
-      <rect x="34" y={top + 60} width="5" height={h - 90} rx="2.5" fill="#fff" fillOpacity=".45" />
       <g transform={`translate(100 ${cy})`} fill={INK}>
-        <ellipse rx="62" ry="78" fill={LABEL} stroke={INK} strokeWidth="1" />
-        <ellipse rx="57" ry="73" fill="none" stroke={INK} strokeWidth=".5" />
-        <text y="-46" textAnchor="middle" fontFamily="Hanken Grotesk, sans-serif" fontSize="7.5" letterSpacing="2.2">FIELDNOTE</text>
-        <text y="-24" textAnchor="middle" fontFamily="Instrument Serif, serif" fontSize="11" fill={MUTED}>
+        <ellipse rx="61.5" ry="77.5" fill={LABEL} stroke={INK} strokeWidth="1" />
+        <ellipse rx="56.75" ry="72.75" fill="none" stroke={INK} strokeWidth=".5" />
+        <rect x="-30" y="8" width="60" height=".5" />
+        <text y="-44" dx="1.1" textAnchor="middle" fontFamily="Figtree, sans-serif" fontSize="7.5" letterSpacing="2.2">FIELDNOTE</text>
+        <text y="-22.11" textAnchor="middle" fontFamily="Instrument Serif, serif" fontSize="11" fill={MUTED}>
           {no === "C" ? "Custom" : `No. ${no}`}
         </text>
-        <text y="-4" textAnchor="middle" fontFamily="Instrument Serif, serif" fontSize={title.length > 12 ? 15 : 17}>{title}</text>
-        <line x1="-30" x2="30" y1="8" y2="8" stroke={INK} strokeWidth=".5" />
+        <text y={longTitle ? -2.85 : -2.17} textAnchor="middle" fontFamily="Instrument Serif, serif" fontSize={longTitle ? 15 : 17}>{title}</text>
         <g fontFamily="IBM Plex Mono, monospace" textAnchor="middle">
-          <text y="24" fontSize="6.6" fill={MUTED}>MADE FOR</text>
-          <text y="36" fontSize={who.length > 14 ? 7 : 8.4}>{who.toUpperCase()}</text>
-          <text y="50" fontSize="6.6" fill={MUTED}>{where.toUpperCase()}</text>
-          <text y="60" fontSize="5.8" fill={MUTED}>{dateText}</text>
+          <text y="26.17" fontSize="6.6" fill={MUTED}>MADE FOR</text>
+          <text y={longName ? 37.69 : 38.21} fontSize={longName ? 7 : 8.4}>{who.toUpperCase()}</text>
+          <text y="52.17" fontSize="6.6" fill={MUTED}>{where.toUpperCase()}</text>
+          <text y="62.15" fontSize="5.8" fill={MUTED}>{dateText}</text>
         </g>
       </g>
     </svg>
