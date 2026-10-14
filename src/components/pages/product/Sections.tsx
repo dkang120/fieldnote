@@ -82,6 +82,7 @@ export function NotesTrio({ d }: { d: D }) {
   );
 }
 
+const COLLECTION_P = "Six house scents, built to be worn every day. Library Musk, Fig Study, Field Vetiver, Late Tea, Salt Hour and Worn Leather each start from a short list of good materials and one clear place they belong: a quiet floor at 9am, or the walk across campus. Each bottle is mixed after you order and labeled with your name.";
 const COLLECTION = "Six house scents, built to be worn every day. Library Musk, Fig Study, Field Vetiver, Late Tea, Salt Hour and Worn Leather each start from a short list of good materials and one clear place they belong: a quiet floor at 9am, the walk across campus, the hour before sunset. Each bottle is mixed after you order and labeled with your name.";
 
 /** Definition + collection. `definition` is false for scents other than Fig Study: only the collection block shows. */
@@ -122,7 +123,7 @@ export function Definition({ d, definition }: { d: D; definition: boolean }) {
           <img alt="The six house scents in a row on a stone slab" src={asset(`${P}/group.webp`)} className="absolute object-cover left-[44px] h-[217px] w-[302px]" style={{ top: 292 - off }} />
           <h2 className={`absolute ${T14} whitespace-nowrap left-[45px]`} style={{ top: 550.4 - off }}>THE HOUSE SCENTS</h2>
           <p className={`absolute ${T12} whitespace-nowrap left-[268.5px]`} style={{ top: 553.5 - off }}>COLLECTION 1</p>
-          <p className={`absolute ${T12} text-justify left-[45px] w-[300px]`} style={{ top: 583.2 - off }}>{COLLECTION}</p>
+          <p className={`absolute ${T12} text-justify left-[45px] w-[300px]`} style={{ top: 583.2 - off }}>{COLLECTION_P}</p>
         </>
       )}
     </section>

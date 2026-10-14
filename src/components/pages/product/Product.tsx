@@ -123,7 +123,7 @@ function PhoneMain({ p }: { p: ProductState }) {
           value={p.city} onChange={(e) => p.setCity(e.target.value)} autoComplete="address-level2" className={`${input} mt-[10px]`} />
         <p id="help-p" role={p.error ? "alert" : undefined} className={`${T12} mt-[8px] w-[358px] ${p.error ? "!text-[#9a4f31]" : "!text-[#6b625b]"}`}>{p.error ?? HELPER}</p>
         <div className="flex gap-[10px] items-start mt-[8px] h-[44px]">
-          <QtySelect p={p} id="qty-p" className="h-[40px] mt-[2px] [&>svg]:left-[79px] [&>svg]:top-[13px]" />
+          <QtySelect p={p} id="qty-p" className="h-[40px] mt-[2px] [&>svg]:left-[78px] [&>svg]:top-[12.5px]" />
           <div ref={p.buyRef("p")}>
             <Button className="h-[44px] px-[32px] w-[243px]" onClick={() => p.reserve("p")}>Reserve, pay at launch</Button>
           </div>

@@ -10,7 +10,7 @@ import { Bag, Check } from "@/components/icons";
 import { QTY_MAX } from "@/lib/cart-types";
 import type { ProductState, Tab } from "./useProduct";
 
-export const T12 = "font-sans font-normal leading-[1.4] text-[12px] text-[#2b231f]";
+export const T12 = "font-sans font-normal leading-[17px] text-[12px] text-[#2b231f]";
 export const T14 = "font-sans font-normal leading-[1.5] text-[14px] text-[#2b231f]";
 
 export function Chevron({ size, dir = "right", className = "" }: { size: number; dir?: "right" | "left" | "down"; className?: string }) {

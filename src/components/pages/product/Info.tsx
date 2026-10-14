@@ -36,7 +36,7 @@ export function Info({ p, device }: { p: ProductState; device: "d" | "t" }) {
       </p>
       <Gap h={16} />
       <div className="flex gap-[10px] items-start relative shrink-0">
-        <QtySelect p={p} id={`qty-${idp}`} className="h-[47px] [&>svg]:left-[90px] [&>svg]:top-[17.5px]" />
+        <QtySelect p={p} id={`qty-${idp}`} className="h-[47px] [&>svg]:left-[77px] [&>svg]:top-[15.5px]" />
         <div ref={p.buyRef(idp)}>
           <Button className="h-[47px] px-[32px] w-[435px]" onClick={() => p.reserve(idp)}>Reserve, pay at launch</Button>
         </div>
