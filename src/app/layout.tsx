@@ -6,7 +6,8 @@ import { Overlays } from "@/components/site/Overlays";
 import { PageView } from "@/components/PageView";
 import { MotionProvider } from "@/components/MotionProvider";
 import { JsonLd } from "@/components/JsonLd";
-import { SITE } from "@/lib/site";
+import { ServiceWorker } from "@/components/ServiceWorker";
+import { SITE, asset } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url + "/"),
@@ -14,7 +15,11 @@ export const metadata: Metadata = {
   description: SITE.description,
   openGraph: { type: "website", siteName: "Fieldnote", title: "Fieldnote — Cologne made the day you order it", description: SITE.description },
   twitter: { card: "summary" },
+  applicationName: "Fieldnote",
+  appleWebApp: { capable: true, title: "Fieldnote", statusBarStyle: "default" },
+  formatDetection: { telephone: false },
   icons: {
+    apple: asset("/icons/apple-touch-icon.png"),
     icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cellipse cx='16' cy='16' rx='11' ry='14' fill='%23F7F4F0' stroke='%232B231F'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-family='serif' font-size='14' fill='%232B231F'%3EF%3C/text%3E%3C/svg%3E",
   },
 };
@@ -46,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <main id="main">{children}</main>
               <Overlays />
               <PageView />
+              <ServiceWorker />
             </UiProvider>
           </CartProvider>
         </MotionProvider>

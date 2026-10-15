@@ -33,6 +33,7 @@ Every page is a 1:1 copy of its Figma frames (Screens page), not a fluid layout.
 - `src/components/pages/build/` — builder UI (base → notes → strength → label → review); `/build/?code=…` reopens a saved blend
 - `src/lib/fill-dates.ts` — bench sessions Mon–Fri, 3pm PT cutoff, `CLOSED_DAYS`
 - `src/lib/analytics.ts` — typed event map → `window.dataLayer` (GA4 ecommerce shape); `?debug=analytics` logs to console
+- Installable app (PWA): `src/app/manifest.ts`, `public/sw.js` (bump `VERSION` to clear old caches), `src/components/ServiceWorker.tsx`, icons in `public/icons/`
 - `src/lib/integrations/` — preview payments/email (default), Shopify Storefront checkout, flat-rate ground shipping, Zebra ZPL label printing
 
 ## Pricing
